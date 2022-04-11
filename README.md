@@ -1,6 +1,6 @@
 # Helix Slack Notification Service
 
-> An example library to be used in and with Project Helix
+Subscribes to Helix Admin notifications and sends them to Slack channels 
 
 ## Status
 [![codecov](https://img.shields.io/codecov/c/github/adobe/helix-slack-notification.svg)](https://codecov.io/gh/adobe/helix-slack-notification)
