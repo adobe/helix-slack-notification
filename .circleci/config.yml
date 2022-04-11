@@ -74,11 +74,10 @@ jobs:
       # see https://circleci.com/orbs/registry/orb/adobe/helix-post-deploy
       # for more available parameters
       - helix-post-deploy/monitoring:
-          targets: Helix Slack Notification Service
-          statuspage_name: Publishing
-          statuspage_group: Publishing Repeated Failure
-          newrelic_group_policy: Development Repeated Failure
-          newrelic_group_targets: universal
+          statuspage_name: Helix Slack Notification Service
+          statuspage_group: Publishing
+          newrelic_group_policy: Publishing Repeated Failure
+          targets: aws
           incubator: true # remove only when promoting service to production
 
   branch-deploy:
