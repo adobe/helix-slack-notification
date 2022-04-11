@@ -25,7 +25,7 @@ createTargets().forEach((target) => {
         .request(target.host())
         .get(target.urlPath())
         .then((response) => {
-          expect(response).to.have.status(200);
+          expect(response).to.have.status(204);
           expect.fail('Not ready yet');
         }).catch((e) => {
           throw e;
