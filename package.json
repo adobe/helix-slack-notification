@@ -19,10 +19,11 @@
     "prepare": "husky install"
   },
   "wsk": {
-    "target": "aws",
     "name": "helix-services/slack-notification@${version}",
+    "memory": 512,
+    "awsRole!important": "arn:aws:iam::118435662149:role/helix-service-role-s3-rw",
     "testUrl": "/_status_check/healthcheck.json",
-    "memory": 256
+    "target": "aws"
   },
   "mocha": {
     "require": [
