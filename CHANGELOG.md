@@ -1,3 +1,10 @@
+## [1.0.6](https://github.com/adobe/helix-slack-notification/compare/v1.0.5...v1.0.6) (2022-04-12)
+
+
+### Bug Fixes
+
+* use special role to access S3 ([8de39b0](https://github.com/adobe/helix-slack-notification/commit/8de39b03ffe92276cf659e3cf97600e30a87ae5e))
+
 ## [1.0.5](https://github.com/adobe/helix-slack-notification/compare/v1.0.4...v1.0.5) (2022-04-12)
 
 
