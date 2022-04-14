@@ -298,6 +298,49 @@ describe('Index Tests', () => {
     assert.strictEqual(result.status, 200);
   });
 
+  it('index successfully notifies on default', async () => {
+    nock('https://lqmig3v5eb.execute-api.us-east-1.amazonaws.com')
+      .post('/slack/slack-bot/v2/notify')
+      .reply(200, JSON.stringify([
+        { status: 200, ts: 42 },
+      ]))
+      .post('/slack/slack-bot/v2/notify')
+      .reply(200, JSON.stringify([
+        { status: 200 },
+      ]));
+    const { main: proxyMain } = await esmock('../src/index.js', {
+      '@adobe/helix-admin-support': {
+        fetchProjectConfig: async () => ({
+          slack: 'T/C',
+          notify: {
+            'index-published': {
+              format: 'default',
+            },
+          },
+        }),
+      },
+    });
+    const result = await proxyMain(new Request('https://localhost/'), {
+      records: [{
+        body: JSON.stringify({
+          owner: 'owner',
+          repo: 'repo',
+          ref: 'ref',
+          op: 'index-published',
+          result: {
+            added: [{
+              path: '/test',
+            }],
+          },
+        }),
+      }],
+      env: {
+        SLACK_NOTIFY_WEBHOOK_SECRET: 'secret',
+      },
+    });
+    assert.strictEqual(result.status, 200);
+  });
+
   it('index stops notifying when first message reports a failure', async () => {
     nock('https://lqmig3v5eb.execute-api.us-east-1.amazonaws.com')
       .post('/slack/slack-bot/v2/notify')
@@ -309,6 +352,43 @@ describe('Index Tests', () => {
           notify: {
             'index-published': {
               format: 'multi-language-blog',
+            },
+          },
+        }),
+      },
+    });
+    const result = await proxyMain(new Request('https://localhost/'), {
+      records: [{
+        body: JSON.stringify({
+          owner: 'owner',
+          repo: 'repo',
+          ref: 'ref',
+          op: 'index-published',
+          result: {
+            added: [{
+              path: '/en/test',
+            }],
+          },
+        }),
+      }],
+      env: {
+        SLACK_NOTIFY_WEBHOOK_SECRET: 'secret',
+      },
+    });
+    assert.strictEqual(result.status, 200);
+  });
+
+  it('index stops notifying when first message reports a failure on default', async () => {
+    nock('https://lqmig3v5eb.execute-api.us-east-1.amazonaws.com')
+      .post('/slack/slack-bot/v2/notify')
+      .reply(500);
+    const { main: proxyMain } = await esmock('../src/index.js', {
+      '@adobe/helix-admin-support': {
+        fetchProjectConfig: async () => ({
+          slack: 'T/C',
+          notify: {
+            'index-published': {
+              format: 'default',
             },
           },
         }),
