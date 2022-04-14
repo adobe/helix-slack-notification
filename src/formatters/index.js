@@ -10,10 +10,12 @@
  * governing permissions and limitations under the License.
  */
 
+import Default from './Default.js';
 import MultiLanguageBlog from './MultiLanguageBlog.js';
 
 const FORMATTERS = new Map([
   ['multi-language-blog', MultiLanguageBlog],
+  ['default', Default],
 ]);
 
 export default FORMATTERS;
