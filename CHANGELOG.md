@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/adobe/helix-slack-notification/compare/v1.0.6...v1.1.0) (2022-04-14)
+
+
+### Features
+
+* add default formatter ([#6](https://github.com/adobe/helix-slack-notification/issues/6)) ([bd68c4e](https://github.com/adobe/helix-slack-notification/commit/bd68c4ec658ee8194426bb1fda5dbf6d0ad6fdb0))
+
 ## [1.0.6](https://github.com/adobe/helix-slack-notification/compare/v1.0.5...v1.0.6) (2022-04-12)
 
 
