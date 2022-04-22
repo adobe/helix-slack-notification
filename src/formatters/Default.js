@@ -18,10 +18,8 @@
  * @returns true if notifying worked, otherwise false
  */
 export default async function notify(projectConfig, payload, slack) {
-  const { host } = projectConfig;
+  const { host } = projectConfig?.cdn?.prod || projectConfig;
   const { added = [] } = payload.result;
-
-  const items = added.map(({ path }) => `https://${host}${path}`);
 
   const lines = [];
   lines.push(`Published ${added.length} new article(s) :white_check_mark:`);
@@ -33,6 +31,7 @@ export default async function notify(projectConfig, payload, slack) {
     return false;
   }
 
+  const items = added.map(({ path }) => (host ? `https://${host}${path}` : path));
   return slack.post({
     text: items.map((item) => `- ${item}`).join('\n'),
     unfurl_links: false,

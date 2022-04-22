@@ -12,7 +12,6 @@
 
 /* eslint-env mocha */
 import assert from 'assert';
-import esmock from 'esmock';
 import { Request } from '@adobe/helix-fetch';
 import { main } from '../src/index.js';
 import { Nock } from './utils.js';
@@ -26,6 +25,13 @@ describe('Index Tests', () => {
   afterEach(() => {
     nock.done();
   });
+
+  const env = {
+    AWS_S3_REGION: 'us-east-1',
+    AWS_S3_ACCESS_KEY_ID: 'access-key-id',
+    AWS_S3_SECRET_ACCESS_KEY: 'secret-access-key',
+    SLACK_NOTIFY_WEBHOOK_SECRET: 'webhook-secret',
+  };
 
   it('index function returns 204 when no notifications are available', async () => {
     const result = await main(new Request('https://localhost/'), {});
@@ -42,12 +48,10 @@ describe('Index Tests', () => {
   });
 
   it('index function handles a missing project configuration gracefully', async () => {
-    const { main: proxyMain } = await esmock('../src/index.js', {
-      '@adobe/helix-admin-support': {
-        fetchProjectConfig: async () => null,
-      },
-    });
-    const result = await proxyMain(new Request('https://localhost/'), {
+    nock.fstab();
+    nock.helixConfig({});
+
+    const result = await main(new Request('https://localhost/'), {
       records: [{
         body: JSON.stringify({
           owner: 'owner',
@@ -56,18 +60,18 @@ describe('Index Tests', () => {
           op: 'index-published',
         }),
       }],
+      env,
     });
     assert.strictEqual(result.status, 200);
   });
 
   it('index function handles a missing notify configuration gracefully', async () => {
-    const { main: proxyMain } = await esmock('../src/index.js', {
-      '@adobe/helix-admin-support': {
-        fetchProjectConfig: async () => ({
-        }),
-      },
+    nock.fstab();
+    nock.helixConfig({
+      data: [],
     });
-    const result = await proxyMain(new Request('https://localhost/'), {
+
+    const result = await main(new Request('https://localhost/'), {
       records: [{
         body: JSON.stringify({
           owner: 'owner',
@@ -76,23 +80,20 @@ describe('Index Tests', () => {
           op: 'index-published',
         }),
       }],
+      env,
     });
     assert.strictEqual(result.status, 200);
   });
 
   it('index function handles a missing slack configuration gracefully', async () => {
-    const { main: proxyMain } = await esmock('../src/index.js', {
-      '@adobe/helix-admin-support': {
-        fetchProjectConfig: async () => ({
-          notify: {
-            'index-published': {
-              format: 'plain',
-            },
-          },
-        }),
-      },
+    nock.fstab();
+    nock.helixConfig({
+      data: [{
+        key: 'notify.index-published.format', value: 'plain',
+      }],
     });
-    const result = await proxyMain(new Request('https://localhost/'), {
+
+    const result = await main(new Request('https://localhost/'), {
       records: [{
         body: JSON.stringify({
           owner: 'owner',
@@ -101,24 +102,22 @@ describe('Index Tests', () => {
           op: 'index-published',
         }),
       }],
+      env,
     });
     assert.strictEqual(result.status, 200);
   });
 
   it('index function handles an unknown operation gracefully', async () => {
-    const { main: proxyMain } = await esmock('../src/index.js', {
-      '@adobe/helix-admin-support': {
-        fetchProjectConfig: async () => ({
-          slack: 'T/C',
-          notify: {
-            'index-published': {
-              format: 'plain',
-            },
-          },
-        }),
-      },
+    nock.fstab();
+    nock.helixConfig({
+      data: [{
+        key: 'slack', value: 'T/C',
+      }, {
+        key: 'notify.index-published.format', value: 'plain',
+      }],
     });
-    const result = await proxyMain(new Request('https://localhost/'), {
+
+    const result = await main(new Request('https://localhost/'), {
       records: [{
         body: JSON.stringify({
           owner: 'owner',
@@ -127,24 +126,21 @@ describe('Index Tests', () => {
           op: 'marge-said-hi',
         }),
       }],
+      env,
     });
     assert.strictEqual(result.status, 200);
   });
 
-  it('index function handles an unknown format gracefully', async () => {
-    const { main: proxyMain } = await esmock('../src/index.js', {
-      '@adobe/helix-admin-support': {
-        fetchProjectConfig: async () => ({
-          slack: 'T/C',
-          notify: {
-            'index-published': {
-              format: 'plain',
-            },
-          },
-        }),
-      },
+  it('index function handles an unknown formatter gracefully', async () => {
+    nock.fstab();
+    nock.helixConfig({
+      data: [{
+        key: 'slack', value: 'T/C',
+      }, {
+        key: 'notify.index-published.format', value: 'plain',
+      }],
     });
-    const result = await proxyMain(new Request('https://localhost/'), {
+    const result = await main(new Request('https://localhost/'), {
       records: [{
         body: JSON.stringify({
           owner: 'owner',
@@ -153,27 +149,22 @@ describe('Index Tests', () => {
           op: 'index-published',
         }),
       }],
-      env: {
-        SLACK_NOTIFY_WEBHOOK_SECRET: 'secret',
-      },
+      env,
     });
     assert.strictEqual(result.status, 200);
   });
 
   it('index function skips an empty added section', async () => {
-    const { main: proxyMain } = await esmock('../src/index.js', {
-      '@adobe/helix-admin-support': {
-        fetchProjectConfig: async () => ({
-          slack: 'T/C',
-          notify: {
-            'index-published': {
-              format: 'multi-language-blog',
-            },
-          },
-        }),
-      },
+    nock.fstab();
+    nock.helixConfig({
+      data: [{
+        key: 'slack', value: 'T/C',
+      }, {
+        key: 'notify.index-published.format', value: 'multi-language-blog',
+      }],
     });
-    const result = await proxyMain(new Request('https://localhost/'), {
+
+    const result = await main(new Request('https://localhost/'), {
       records: [{
         body: JSON.stringify({
           owner: 'owner',
@@ -185,27 +176,22 @@ describe('Index Tests', () => {
           },
         }),
       }],
-      env: {
-        SLACK_NOTIFY_WEBHOOK_SECRET: 'secret',
-      },
+      env,
     });
     assert.strictEqual(result.status, 200);
   });
 
   it('index function handles a missing result in the payload gracefully', async () => {
-    const { main: proxyMain } = await esmock('../src/index.js', {
-      '@adobe/helix-admin-support': {
-        fetchProjectConfig: async () => ({
-          slack: 'T',
-          notify: {
-            'index-published': {
-              format: 'multi-language-blog',
-            },
-          },
-        }),
-      },
+    nock.fstab();
+    nock.helixConfig({
+      data: [{
+        key: 'slack', value: 'T',
+      }, {
+        key: 'notify.index-published.format', value: 'multi-language-blog',
+      }],
     });
-    const result = await proxyMain(new Request('https://localhost/'), {
+
+    const result = await main(new Request('https://localhost/'), {
       records: [{
         body: JSON.stringify({
           owner: 'owner',
@@ -214,27 +200,22 @@ describe('Index Tests', () => {
           op: 'index-published',
         }),
       }],
-      env: {
-        SLACK_NOTIFY_WEBHOOK_SECRET: 'secret',
-      },
+      env,
     });
     assert.strictEqual(result.status, 200);
   });
 
   it('index function handles a bad slack configuration gracefully', async () => {
-    const { main: proxyMain } = await esmock('../src/index.js', {
-      '@adobe/helix-admin-support': {
-        fetchProjectConfig: async () => ({
-          slack: 'T',
-          notify: {
-            'index-published': {
-              format: 'multi-language-blog',
-            },
-          },
-        }),
-      },
+    nock.fstab();
+    nock.helixConfig({
+      data: [{
+        key: 'slack', value: 'T',
+      }, {
+        key: 'notify.index-published.format', value: 'multi-language-blog',
+      }],
     });
-    const result = await proxyMain(new Request('https://localhost/'), {
+
+    const result = await main(new Request('https://localhost/'), {
       records: [{
         body: JSON.stringify({
           owner: 'owner',
@@ -248,14 +229,12 @@ describe('Index Tests', () => {
           },
         }),
       }],
-      env: {
-        SLACK_NOTIFY_WEBHOOK_SECRET: 'secret',
-      },
+      env,
     });
     assert.strictEqual(result.status, 200);
   });
 
-  it('index successfully notifies', async () => {
+  it('index successfully notifies with host', async () => {
     nock('https://lqmig3v5eb.execute-api.us-east-1.amazonaws.com')
       .post('/slack/slack-bot/v2/notify')
       .reply(200, JSON.stringify([
@@ -265,19 +244,18 @@ describe('Index Tests', () => {
       .reply(200, JSON.stringify([
         { status: 200 },
       ]));
-    const { main: proxyMain } = await esmock('../src/index.js', {
-      '@adobe/helix-admin-support': {
-        fetchProjectConfig: async () => ({
-          slack: 'T/C',
-          notify: {
-            'index-published': {
-              format: 'multi-language-blog',
-            },
-          },
-        }),
-      },
+    nock.fstab();
+    nock.helixConfig({
+      data: [{
+        key: 'host', value: 'localhost',
+      }, {
+        key: 'slack', value: 'T/C',
+      }, {
+        key: 'notify.index-published.format', value: 'multi-language-blog',
+      }],
     });
-    const result = await proxyMain(new Request('https://localhost/'), {
+
+    const result = await main(new Request('https://localhost/'), {
       records: [{
         body: JSON.stringify({
           owner: 'owner',
@@ -291,14 +269,12 @@ describe('Index Tests', () => {
           },
         }),
       }],
-      env: {
-        SLACK_NOTIFY_WEBHOOK_SECRET: 'secret',
-      },
+      env,
     });
     assert.strictEqual(result.status, 200);
   });
 
-  it('index successfully notifies on default', async () => {
+  it('index successfully notifies without host', async () => {
     nock('https://lqmig3v5eb.execute-api.us-east-1.amazonaws.com')
       .post('/slack/slack-bot/v2/notify')
       .reply(200, JSON.stringify([
@@ -308,19 +284,53 @@ describe('Index Tests', () => {
       .reply(200, JSON.stringify([
         { status: 200 },
       ]));
-    const { main: proxyMain } = await esmock('../src/index.js', {
-      '@adobe/helix-admin-support': {
-        fetchProjectConfig: async () => ({
-          slack: 'T/C',
-          notify: {
-            'index-published': {
-              format: 'default',
-            },
+    nock.fstab();
+    nock.helixConfig({
+      data: [{
+        key: 'slack', value: 'T/C',
+      }, {
+        key: 'notify.index-published.format', value: 'multi-language-blog',
+      }],
+    });
+
+    const result = await main(new Request('https://localhost/'), {
+      records: [{
+        body: JSON.stringify({
+          owner: 'owner',
+          repo: 'repo',
+          ref: 'ref',
+          op: 'index-published',
+          result: {
+            added: [{
+              path: '/blog/test',
+            }],
           },
         }),
-      },
+      }],
+      env,
     });
-    const result = await proxyMain(new Request('https://localhost/'), {
+    assert.strictEqual(result.status, 200);
+  });
+
+  it('index successfully notifies on default without host', async () => {
+    nock('https://lqmig3v5eb.execute-api.us-east-1.amazonaws.com')
+      .post('/slack/slack-bot/v2/notify')
+      .reply(200, JSON.stringify([
+        { status: 200, ts: 42 },
+      ]))
+      .post('/slack/slack-bot/v2/notify')
+      .reply(200, JSON.stringify([
+        { status: 200 },
+      ]));
+    nock.fstab();
+    nock.helixConfig({
+      data: [{
+        key: 'slack', value: 'T/C',
+      }, {
+        key: 'notify.index-published.format', value: 'default',
+      }],
+    });
+    const result = await main(new Request('https://localhost/'), {
       records: [{
         body: JSON.stringify({
           owner: 'owner',
@@ -334,9 +344,47 @@ describe('Index Tests', () => {
           },
         }),
       }],
-      env: {
-        SLACK_NOTIFY_WEBHOOK_SECRET: 'secret',
-      },
+      env,
+    });
+    assert.strictEqual(result.status, 200);
+  });
+
+  it('index successfully notifies on default with host', async () => {
+    nock('https://lqmig3v5eb.execute-api.us-east-1.amazonaws.com')
+      .post('/slack/slack-bot/v2/notify')
+      .reply(200, JSON.stringify([
+        { status: 200, ts: 42 },
+      ]))
+      .post('/slack/slack-bot/v2/notify')
+      .reply(200, JSON.stringify([
+        { status: 200 },
+      ]));
+    nock.fstab();
+    nock.helixConfig({
+      data: [{
+        key: 'host', value: 'localhost',
+      }, {
+        key: 'slack', value: 'T/C',
+      }, {
+        key: 'notify.index-published.format', value: 'default',
+      }],
+    });
+
+    const result = await main(new Request('https://localhost/'), {
+      records: [{
+        body: JSON.stringify({
+          owner: 'owner',
+          repo: 'repo',
+          ref: 'ref',
+          op: 'index-published',
+          result: {
+            added: [{
+              path: '/test',
+            }],
+          },
+        }),
+      }],
+      env,
     });
     assert.strictEqual(result.status, 200);
   });
@@ -345,19 +393,16 @@ describe('Index Tests', () => {
     nock('https://lqmig3v5eb.execute-api.us-east-1.amazonaws.com')
       .post('/slack/slack-bot/v2/notify')
       .reply(500);
-    const { main: proxyMain } = await esmock('../src/index.js', {
-      '@adobe/helix-admin-support': {
-        fetchProjectConfig: async () => ({
-          slack: 'T/C',
-          notify: {
-            'index-published': {
-              format: 'multi-language-blog',
-            },
-          },
-        }),
-      },
+    nock.fstab();
+    nock.helixConfig({
+      data: [{
+        key: 'slack', value: 'T/C',
+      }, {
+        key: 'notify.index-published.format', value: 'multi-language-blog',
+      }],
     });
-    const result = await proxyMain(new Request('https://localhost/'), {
+
+    const result = await main(new Request('https://localhost/'), {
       records: [{
         body: JSON.stringify({
           owner: 'owner',
@@ -371,9 +416,7 @@ describe('Index Tests', () => {
           },
         }),
       }],
-      env: {
-        SLACK_NOTIFY_WEBHOOK_SECRET: 'secret',
-      },
+      env,
     });
     assert.strictEqual(result.status, 200);
   });
@@ -382,19 +425,16 @@ describe('Index Tests', () => {
     nock('https://lqmig3v5eb.execute-api.us-east-1.amazonaws.com')
       .post('/slack/slack-bot/v2/notify')
       .reply(500);
-    const { main: proxyMain } = await esmock('../src/index.js', {
-      '@adobe/helix-admin-support': {
-        fetchProjectConfig: async () => ({
-          slack: 'T/C',
-          notify: {
-            'index-published': {
-              format: 'default',
-            },
-          },
-        }),
-      },
+    nock.fstab();
+    nock.helixConfig({
+      data: [{
+        key: 'slack', value: 'T/C',
+      }, {
+        key: 'notify.index-published.format', value: 'default',
+      }],
     });
-    const result = await proxyMain(new Request('https://localhost/'), {
+
+    const result = await main(new Request('https://localhost/'), {
       records: [{
         body: JSON.stringify({
           owner: 'owner',
@@ -408,9 +448,7 @@ describe('Index Tests', () => {
           },
         }),
       }],
-      env: {
-        SLACK_NOTIFY_WEBHOOK_SECRET: 'secret',
-      },
+      env,
     });
     assert.strictEqual(result.status, 200);
   });
@@ -421,19 +459,16 @@ describe('Index Tests', () => {
       .reply(200, JSON.stringify([
         { status: 403 },
       ]));
-    const { main: proxyMain } = await esmock('../src/index.js', {
-      '@adobe/helix-admin-support': {
-        fetchProjectConfig: async () => ({
-          slack: 'T/C',
-          notify: {
-            'index-published': {
-              format: 'multi-language-blog',
-            },
-          },
-        }),
-      },
+    nock.fstab();
+    nock.helixConfig({
+      data: [{
+        key: 'slack', value: 'T/C',
+      }, {
+        key: 'notify.index-published.format', value: 'multi-language-blog',
+      }],
     });
-    const result = await proxyMain(new Request('https://localhost/'), {
+
+    const result = await main(new Request('https://localhost/'), {
       records: [{
         body: JSON.stringify({
           owner: 'owner',
@@ -447,9 +482,7 @@ describe('Index Tests', () => {
           },
         }),
       }],
-      env: {
-        SLACK_NOTIFY_WEBHOOK_SECRET: 'secret',
-      },
+      env,
     });
     assert.strictEqual(result.status, 200);
   });

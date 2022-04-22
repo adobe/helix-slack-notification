@@ -27,7 +27,7 @@ async function handleNotification(payload, env, log) {
   } = payload;
   log.info(`Received '${op}' notification for: ${owner}/${repo}/${ref}`);
 
-  const ctx = { attributes: [], log };
+  const ctx = { attributes: [], env, log };
   const opts = {
     owner, repo, ref, path: '/',
   };
