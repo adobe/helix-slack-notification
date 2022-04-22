@@ -12,6 +12,11 @@
 import assert from 'assert';
 import nock from 'nock';
 
+const FSTAB = `
+mountpoints:
+  /: https://drive.google.com/drive/folders/1gfqXGTDTsll26JdxkqCb6XEDOv1aym7y
+`;
+
 export function Nock() {
   const scopes = {};
 
@@ -41,6 +46,14 @@ export function Nock() {
       nock.emitter.off('no match', noMatchHandler);
     }
   };
+
+  nocker.fstab = (fstab = FSTAB, owner = 'owner', repo = 'repo') => nocker('https://helix-code-bus.s3.us-east-1.amazonaws.com')
+    .get(`/${owner}/${repo}/main/fstab.yaml?x-id=GetObject`)
+    .reply(200, fstab);
+
+  nocker.helixConfig = (data, contentBusId = '2dc2835c6ee5a4c81403901bf504d49fcc4b2a4c4f0d5378cc4bec82a6c') => nocker('https://helix-content-bus.s3.us-east-1.amazonaws.com')
+    .get(`/${contentBusId}/preview/.helix/config.json?x-id=GetObject`)
+    .reply(data ? 200 : 404, data);
 
   return nocker;
 }

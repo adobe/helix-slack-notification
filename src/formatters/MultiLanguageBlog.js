@@ -15,6 +15,7 @@ const LANGUAGE_TIMEZONE_MAP = new Map([
   ['de', 'Europe/Berlin'],
   ['it', 'Europe/Rome'],
   ['fr', 'Europe/Paris'],
+  ['uk', 'Europe/London'],
   ['jp', 'Asia/Tokyo'],
   ['ko', 'Asia/Seoul'],
   ['es', 'Europe/Madrid'],
@@ -43,15 +44,18 @@ function getUpcomingHours(timeZone) {
  * @returns true if notifying worked, otherwise false
  */
 export default async function notify(projectConfig, payload, slack) {
-  const { host } = projectConfig;
+  const { host } = projectConfig?.cdn?.prod || projectConfig;
   const { added = [] } = payload.result;
 
-  const [, language] = added[0].path.split('/');
-  const items = added.map(({ path }) => `https://${host}${path}`);
-  const time = getUpcomingHours(LANGUAGE_TIMEZONE_MAP.get(language));
-
   const lines = [];
-  lines.push(`${time} push is live in \`${language}\` - ${added.length} new article(s) :white_check_mark:`);
+  const [, language] = added[0].path.split('/');
+  const timeZone = LANGUAGE_TIMEZONE_MAP.get(language);
+  if (timeZone) {
+    const time = getUpcomingHours(timeZone);
+    lines.push(`${time} push is live in \`${language}\` - ${added.length} new article(s) :white_check_mark:`);
+  } else {
+    lines.push(`${added.length} new article(s) in ${language} :white_check_mark:`);
+  }
 
   const result = await slack.post({
     text: lines.join('\n'),
@@ -60,6 +64,7 @@ export default async function notify(projectConfig, payload, slack) {
     return false;
   }
 
+  const items = added.map(({ path }) => (host ? `https://${host}${path}` : path));
   return slack.post({
     text: items.map((item) => `- ${item}`).join('\n'),
     unfurl_links: false,
