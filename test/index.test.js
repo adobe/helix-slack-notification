@@ -26,6 +26,13 @@ describe('Index Tests', () => {
     nock.done();
   });
 
+  const env = {
+    AWS_S3_REGION: 'us-east-1',
+    AWS_S3_ACCESS_KEY_ID: 'access-key-id',
+    AWS_S3_SECRET_ACCESS_KEY: 'secret-access-key',
+    SLACK_NOTIFY_WEBHOOK_SECRET: 'webhook-secret',
+  };
+
   it('index function returns 204 when no notifications are available', async () => {
     const result = await main(new Request('https://localhost/'), {});
     assert.strictEqual(result.status, 204);
@@ -53,9 +60,7 @@ describe('Index Tests', () => {
           op: 'index-published',
         }),
       }],
-      env: {
-        AWS_S3_REGION: 'us-east-1',
-      },
+      env,
     });
     assert.strictEqual(result.status, 200);
   });
@@ -75,6 +80,7 @@ describe('Index Tests', () => {
           op: 'index-published',
         }),
       }],
+      env,
     });
     assert.strictEqual(result.status, 200);
   });
@@ -96,6 +102,7 @@ describe('Index Tests', () => {
           op: 'index-published',
         }),
       }],
+      env,
     });
     assert.strictEqual(result.status, 200);
   });
@@ -119,6 +126,7 @@ describe('Index Tests', () => {
           op: 'marge-said-hi',
         }),
       }],
+      env,
     });
     assert.strictEqual(result.status, 200);
   });
@@ -141,9 +149,7 @@ describe('Index Tests', () => {
           op: 'index-published',
         }),
       }],
-      env: {
-        SLACK_NOTIFY_WEBHOOK_SECRET: 'secret',
-      },
+      env,
     });
     assert.strictEqual(result.status, 200);
   });
@@ -170,9 +176,7 @@ describe('Index Tests', () => {
           },
         }),
       }],
-      env: {
-        SLACK_NOTIFY_WEBHOOK_SECRET: 'secret',
-      },
+      env,
     });
     assert.strictEqual(result.status, 200);
   });
@@ -196,9 +200,7 @@ describe('Index Tests', () => {
           op: 'index-published',
         }),
       }],
-      env: {
-        SLACK_NOTIFY_WEBHOOK_SECRET: 'secret',
-      },
+      env,
     });
     assert.strictEqual(result.status, 200);
   });
@@ -227,9 +229,7 @@ describe('Index Tests', () => {
           },
         }),
       }],
-      env: {
-        SLACK_NOTIFY_WEBHOOK_SECRET: 'secret',
-      },
+      env,
     });
     assert.strictEqual(result.status, 200);
   });
@@ -269,9 +269,7 @@ describe('Index Tests', () => {
           },
         }),
       }],
-      env: {
-        SLACK_NOTIFY_WEBHOOK_SECRET: 'secret',
-      },
+      env,
     });
     assert.strictEqual(result.status, 200);
   });
@@ -309,9 +307,7 @@ describe('Index Tests', () => {
           },
         }),
       }],
-      env: {
-        SLACK_NOTIFY_WEBHOOK_SECRET: 'secret',
-      },
+      env,
     });
     assert.strictEqual(result.status, 200);
   });
@@ -348,9 +344,7 @@ describe('Index Tests', () => {
           },
         }),
       }],
-      env: {
-        SLACK_NOTIFY_WEBHOOK_SECRET: 'secret',
-      },
+      env,
     });
     assert.strictEqual(result.status, 200);
   });
@@ -375,6 +369,7 @@ describe('Index Tests', () => {
         key: 'notify.index-published.format', value: 'default',
       }],
     });
+
     const result = await main(new Request('https://localhost/'), {
       records: [{
         body: JSON.stringify({
@@ -389,9 +384,7 @@ describe('Index Tests', () => {
           },
         }),
       }],
-      env: {
-        SLACK_NOTIFY_WEBHOOK_SECRET: 'secret',
-      },
+      env,
     });
     assert.strictEqual(result.status, 200);
   });
@@ -423,9 +416,7 @@ describe('Index Tests', () => {
           },
         }),
       }],
-      env: {
-        SLACK_NOTIFY_WEBHOOK_SECRET: 'secret',
-      },
+      env,
     });
     assert.strictEqual(result.status, 200);
   });
@@ -457,9 +448,7 @@ describe('Index Tests', () => {
           },
         }),
       }],
-      env: {
-        SLACK_NOTIFY_WEBHOOK_SECRET: 'secret',
-      },
+      env,
     });
     assert.strictEqual(result.status, 200);
   });
@@ -493,9 +482,7 @@ describe('Index Tests', () => {
           },
         }),
       }],
-      env: {
-        SLACK_NOTIFY_WEBHOOK_SECRET: 'secret',
-      },
+      env,
     });
     assert.strictEqual(result.status, 200);
   });
