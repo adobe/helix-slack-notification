@@ -49,13 +49,9 @@ export default async function notify(projectConfig, payload, slack) {
 
   const lines = [];
   const [, language] = added[0].path.split('/');
-  const timeZone = LANGUAGE_TIMEZONE_MAP.get(language);
-  if (timeZone) {
-    const time = getUpcomingHours(timeZone);
-    lines.push(`${time} push is live in \`${language}\` - ${added.length} new article(s) :white_check_mark:`);
-  } else {
-    lines.push(`${added.length} new article(s) in ${language} :white_check_mark:`);
-  }
+  const timeZone = LANGUAGE_TIMEZONE_MAP.get(language) || LANGUAGE_TIMEZONE_MAP.get('en');
+  const time = getUpcomingHours(timeZone);
+  lines.push(`${time} push is live in \`${language}\` - ${added.length} new article(s) :white_check_mark:`);
 
   const result = await slack.post({
     text: lines.join('\n'),

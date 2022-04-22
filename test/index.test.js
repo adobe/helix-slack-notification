@@ -53,6 +53,9 @@ describe('Index Tests', () => {
           op: 'index-published',
         }),
       }],
+      env: {
+        AWS_S3_REGION: 'us-east-1',
+      },
     });
     assert.strictEqual(result.status, 200);
   });
