@@ -1,3 +1,10 @@
+## [1.1.5](https://github.com/adobe/helix-slack-notification/compare/v1.1.4...v1.1.5) (2022-04-25)
+
+
+### Bug Fixes
+
+* use deploy-routes ([5e6cbcb](https://github.com/adobe/helix-slack-notification/commit/5e6cbcba1e5f55d5d1542230a25102c567c04ba2))
+
 ## [1.1.4](https://github.com/adobe/helix-slack-notification/compare/v1.1.3...v1.1.4) (2022-04-22)
 
 
