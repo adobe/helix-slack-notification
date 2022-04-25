@@ -14,7 +14,7 @@
     "commit": "git-cz",
     "build": "hedy -v",
     "deploy": "hedy -v --deploy --test",
-    "deploy-sequences": "hedy --no-build -no-hints -l major -l minor --cleanup-patch 1w --cleanup-minor 1m --cleanup-major 1y",
+    "deploy-sequences": "hedy --no-build --no-hints -l major -l minor --cleanup-patch 1w --cleanup-minor 1m --cleanup-major 1y",
     "deploy-ci": "hedy -v --deploy --test --pkgVersion=ci$CIRCLE_BUILD_NUM -l ci --cleanup-ci 24h",
     "prepare": "husky install"
   },
@@ -56,7 +56,7 @@
   },
   "devDependencies": {
     "@adobe/eslint-config-helix": "1.3.2",
-    "@adobe/helix-deploy": "6.2.26",
+    "@adobe/helix-deploy": "6.2.27",
     "@adobe/helix-universal": "3.0.9",
     "@semantic-release/changelog": "6.0.1",
     "@semantic-release/exec": "6.0.3",
