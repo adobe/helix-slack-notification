@@ -1,6 +1,6 @@
 # Helix Slack Notification Service
 
-Subscribes to Helix Admin notifications and sends them to Slack channels 
+Subscribes to Helix Admin notifications and sends them to Slack channels. Gets [triggered by AWS SQS](https://docs.aws.amazon.com/lambda/latest/dg/with-sqs.html).
 
 ## Status
 [![codecov](https://img.shields.io/codecov/c/github/adobe/helix-slack-notification.svg)](https://codecov.io/gh/adobe/helix-slack-notification)
