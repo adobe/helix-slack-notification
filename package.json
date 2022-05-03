@@ -48,9 +48,9 @@
   "dependencies": {
     "@adobe/helix-admin-support": "1.1.12",
     "@adobe/helix-fetch": "3.0.9",
-    "@adobe/helix-shared-config": "2.0.3",
-    "@adobe/helix-shared-utils": "2.0.8",
-    "@adobe/helix-shared-wrap": "1.0.4",
+    "@adobe/helix-shared-config": "2.0.5",
+    "@adobe/helix-shared-utils": "2.0.9",
+    "@adobe/helix-shared-wrap": "1.0.5",
     "@adobe/helix-status": "9.2.11",
     "@adobe/helix-universal-logger": "2.0.7"
   },
