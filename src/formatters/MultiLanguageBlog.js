@@ -20,6 +20,7 @@ const LANGUAGE_TIMEZONE_MAP = new Map([
   ['ko', 'Asia/Seoul'],
   ['es', 'Europe/Madrid'],
   ['br', 'America/Sao_Paulo'],
+  ['au', 'Australia/Sydney'],
 ]);
 
 /**

@@ -274,6 +274,46 @@ describe('Index Tests', () => {
     assert.strictEqual(result.status, 200);
   });
 
+  it('index successfully notifies with cdn.prod.host', async () => {
+    nock('https://lqmig3v5eb.execute-api.us-east-1.amazonaws.com')
+      .post('/slack/slack-bot/v2/notify')
+      .reply(200, JSON.stringify([
+        { status: 200, ts: 42 },
+      ]))
+      .post('/slack/slack-bot/v2/notify')
+      .reply(200, JSON.stringify([
+        { status: 200 },
+      ]));
+    nock.fstab();
+    nock.helixConfig({
+      data: [{
+        key: 'cdn.prod.host', value: 'localhost',
+      }, {
+        key: 'slack', value: 'T/C',
+      }, {
+        key: 'notify.index-published.format', value: 'multi-language-blog',
+      }],
+    });
+
+    const result = await main(new Request('https://localhost/'), {
+      records: [{
+        body: JSON.stringify({
+          owner: 'owner',
+          repo: 'repo',
+          ref: 'ref',
+          op: 'index-published',
+          result: {
+            added: [{
+              path: '/en/test',
+            }],
+          },
+        }),
+      }],
+      env,
+    });
+    assert.strictEqual(result.status, 200);
+  });
+
   it('index successfully notifies without host', async () => {
     nock('https://lqmig3v5eb.execute-api.us-east-1.amazonaws.com')
       .post('/slack/slack-bot/v2/notify')
@@ -363,6 +403,46 @@ describe('Index Tests', () => {
     nock.helixConfig({
       data: [{
         key: 'host', value: 'localhost',
+      }, {
+        key: 'slack', value: 'T/C',
+      }, {
+        key: 'notify.index-published.format', value: 'default',
+      }],
+    });
+
+    const result = await main(new Request('https://localhost/'), {
+      records: [{
+        body: JSON.stringify({
+          owner: 'owner',
+          repo: 'repo',
+          ref: 'ref',
+          op: 'index-published',
+          result: {
+            added: [{
+              path: '/test',
+            }],
+          },
+        }),
+      }],
+      env,
+    });
+    assert.strictEqual(result.status, 200);
+  });
+
+  it('index successfully notifies on default with cdn.prod.host', async () => {
+    nock('https://lqmig3v5eb.execute-api.us-east-1.amazonaws.com')
+      .post('/slack/slack-bot/v2/notify')
+      .reply(200, JSON.stringify([
+        { status: 200, ts: 42 },
+      ]))
+      .post('/slack/slack-bot/v2/notify')
+      .reply(200, JSON.stringify([
+        { status: 200 },
+      ]));
+    nock.fstab();
+    nock.helixConfig({
+      data: [{
+        key: 'cdn.prod.host', value: 'localhost',
       }, {
         key: 'slack', value: 'T/C',
       }, {
