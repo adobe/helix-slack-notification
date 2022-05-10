@@ -1,3 +1,10 @@
+## [1.1.13](https://github.com/adobe/helix-slack-notification/compare/v1.1.12...v1.1.13) (2022-05-10)
+
+
+### Bug Fixes
+
+* add au timezone ([#28](https://github.com/adobe/helix-slack-notification/issues/28)) ([07b9dfa](https://github.com/adobe/helix-slack-notification/commit/07b9dfa9a8998e2e23147d4232c2ffc9e9bcd785))
+
 ## [1.1.12](https://github.com/adobe/helix-slack-notification/compare/v1.1.11...v1.1.12) (2022-05-07)
 
 
