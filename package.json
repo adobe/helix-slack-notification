@@ -72,7 +72,7 @@
     "eslint-plugin-header": "3.1.1",
     "eslint-plugin-import": "2.26.0",
     "esmock": "1.7.5",
-    "husky": "7.0.4",
+    "husky": "8.0.1",
     "junit-report-builder": "3.0.0",
     "lint-staged": "12.4.1",
     "mocha": "10.0.0",
