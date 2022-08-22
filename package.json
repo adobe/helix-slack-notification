@@ -69,17 +69,17 @@
     "commitizen": "4.2.5",
     "cz-conventional-changelog": "3.3.0",
     "dotenv": "16.0.1",
-    "eslint": "8.21.0",
+    "eslint": "8.22.0",
     "eslint-plugin-header": "3.1.1",
     "eslint-plugin-import": "2.26.0",
-    "esmock": "1.9.2",
+    "esmock": "1.9.5",
     "husky": "8.0.1",
     "junit-report-builder": "3.0.1",
     "lint-staged": "13.0.3",
     "mocha": "10.0.0",
     "mocha-multi-reporters": "1.5.1",
     "nock": "13.2.9",
-    "semantic-release": "19.0.3"
+    "semantic-release": "19.0.4"
   },
   "lint-staged": {
     "*.js": "eslint"
