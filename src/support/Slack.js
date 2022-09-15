@@ -42,7 +42,7 @@ export default class Slack {
     const signature = this.generateSignature(body);
 
     // hard-coded endpoint until slack-bot can be called directly
-    const res = await fetch('https://lqmig3v5eb.execute-api.us-east-1.amazonaws.com/slack/slack-bot/v2/notify', {
+    const res = await fetch('https://lqmig3v5eb.execute-api.us-east-1.amazonaws.com/slack/slack-bot/v4/notify', {
       method: 'POST',
       cache: 'no-store',
       body,
