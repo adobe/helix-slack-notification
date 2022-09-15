@@ -236,11 +236,11 @@ describe('Index Tests', () => {
 
   it('index successfully notifies with host', async () => {
     nock('https://lqmig3v5eb.execute-api.us-east-1.amazonaws.com')
-      .post('/slack/slack-bot/v2/notify')
+      .post('/slack/slack-bot/v4/notify')
       .reply(200, JSON.stringify([
         { status: 200, ts: 42 },
       ]))
-      .post('/slack/slack-bot/v2/notify')
+      .post('/slack/slack-bot/v4/notify')
       .reply(200, JSON.stringify([
         { status: 200 },
       ]));
@@ -276,11 +276,11 @@ describe('Index Tests', () => {
 
   it('index successfully notifies with cdn.prod.host', async () => {
     nock('https://lqmig3v5eb.execute-api.us-east-1.amazonaws.com')
-      .post('/slack/slack-bot/v2/notify')
+      .post('/slack/slack-bot/v4/notify')
       .reply(200, JSON.stringify([
         { status: 200, ts: 42 },
       ]))
-      .post('/slack/slack-bot/v2/notify')
+      .post('/slack/slack-bot/v4/notify')
       .reply(200, JSON.stringify([
         { status: 200 },
       ]));
@@ -316,11 +316,11 @@ describe('Index Tests', () => {
 
   it('index successfully notifies without host', async () => {
     nock('https://lqmig3v5eb.execute-api.us-east-1.amazonaws.com')
-      .post('/slack/slack-bot/v2/notify')
+      .post('/slack/slack-bot/v4/notify')
       .reply(200, JSON.stringify([
         { status: 200, ts: 42 },
       ]))
-      .post('/slack/slack-bot/v2/notify')
+      .post('/slack/slack-bot/v4/notify')
       .reply(200, JSON.stringify([
         { status: 200 },
       ]));
@@ -354,11 +354,11 @@ describe('Index Tests', () => {
 
   it('index successfully notifies on default without host', async () => {
     nock('https://lqmig3v5eb.execute-api.us-east-1.amazonaws.com')
-      .post('/slack/slack-bot/v2/notify')
+      .post('/slack/slack-bot/v4/notify')
       .reply(200, JSON.stringify([
         { status: 200, ts: 42 },
       ]))
-      .post('/slack/slack-bot/v2/notify')
+      .post('/slack/slack-bot/v4/notify')
       .reply(200, JSON.stringify([
         { status: 200 },
       ]));
@@ -391,11 +391,11 @@ describe('Index Tests', () => {
 
   it('index successfully notifies on default with host', async () => {
     nock('https://lqmig3v5eb.execute-api.us-east-1.amazonaws.com')
-      .post('/slack/slack-bot/v2/notify')
+      .post('/slack/slack-bot/v4/notify')
       .reply(200, JSON.stringify([
         { status: 200, ts: 42 },
       ]))
-      .post('/slack/slack-bot/v2/notify')
+      .post('/slack/slack-bot/v4/notify')
       .reply(200, JSON.stringify([
         { status: 200 },
       ]));
@@ -431,11 +431,11 @@ describe('Index Tests', () => {
 
   it('index successfully notifies on default with cdn.prod.host', async () => {
     nock('https://lqmig3v5eb.execute-api.us-east-1.amazonaws.com')
-      .post('/slack/slack-bot/v2/notify')
+      .post('/slack/slack-bot/v4/notify')
       .reply(200, JSON.stringify([
         { status: 200, ts: 42 },
       ]))
-      .post('/slack/slack-bot/v2/notify')
+      .post('/slack/slack-bot/v4/notify')
       .reply(200, JSON.stringify([
         { status: 200 },
       ]));
@@ -471,7 +471,7 @@ describe('Index Tests', () => {
 
   it('index stops notifying when first message reports a failure', async () => {
     nock('https://lqmig3v5eb.execute-api.us-east-1.amazonaws.com')
-      .post('/slack/slack-bot/v2/notify')
+      .post('/slack/slack-bot/v4/notify')
       .reply(500);
     nock.fstab();
     nock.helixConfig({
@@ -503,7 +503,7 @@ describe('Index Tests', () => {
 
   it('index stops notifying when first message reports a failure on default', async () => {
     nock('https://lqmig3v5eb.execute-api.us-east-1.amazonaws.com')
-      .post('/slack/slack-bot/v2/notify')
+      .post('/slack/slack-bot/v4/notify')
       .reply(500);
     nock.fstab();
     nock.helixConfig({
@@ -535,7 +535,7 @@ describe('Index Tests', () => {
 
   it('index stops notifying when first message reports a 403', async () => {
     nock('https://lqmig3v5eb.execute-api.us-east-1.amazonaws.com')
-      .post('/slack/slack-bot/v2/notify')
+      .post('/slack/slack-bot/v4/notify')
       .reply(200, JSON.stringify([
         { status: 403 },
       ]));
