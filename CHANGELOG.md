@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/adobe/helix-slack-notification/compare/v1.1.48...v1.2.0) (2022-09-15)
+
+
+### Features
+
+* notify latest version of slack-bot ([#94](https://github.com/adobe/helix-slack-notification/issues/94)) ([73f4679](https://github.com/adobe/helix-slack-notification/commit/73f46793908b3d68ce1dfae7f15ca4d5c33fe962))
+
 ## [1.1.48](https://github.com/adobe/helix-slack-notification/compare/v1.1.47...v1.1.48) (2022-09-14)
 
 
