@@ -12,7 +12,7 @@
 import wrap from '@adobe/helix-shared-wrap';
 import { logger } from '@adobe/helix-universal-logger';
 import { wrap as status } from '@adobe/helix-status';
-import { Response } from '@adobe/helix-fetch';
+import { Response } from '@adobe/fetch';
 
 import { fetchProjectConfig } from '@adobe/helix-admin-support';
 import Slack from './support/Slack.js';

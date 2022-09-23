@@ -9,13 +9,13 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-import { context as fetchContext, h1 } from '@adobe/helix-fetch';
+import { context as fetchContext, h1 } from '@adobe/fetch';
 
 /* c8 ignore next 7 */
 export const { fetch } = process.env.HELIX_FETCH_FORCE_HTTP1
   ? h1({
-    userAgent: 'helix-fetch', // static user-agent for recorded tests
+    userAgent: 'adobe-fetch', // static user-agent for recorded tests
   })
   : fetchContext({
-    userAgent: 'helix-fetch', // static user-agent for recorded tests
+    userAgent: 'adobe-fetch', // static user-agent for recorded tests
   });
