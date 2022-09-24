@@ -1,3 +1,10 @@
+## [1.2.5](https://github.com/adobe/helix-slack-notification/compare/v1.2.4...v1.2.5) (2022-09-24)
+
+
+### Bug Fixes
+
+* @adobe/helix-fetch -> @adobe/fetch ([ce72a99](https://github.com/adobe/helix-slack-notification/commit/ce72a992ea7c58734012d15e3b768781fd12ffc3))
+
 ## [1.2.4](https://github.com/adobe/helix-slack-notification/compare/v1.2.3...v1.2.4) (2022-09-24)
 
 
