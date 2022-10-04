@@ -52,7 +52,7 @@
     "@adobe/helix-shared-config": "9.1.1",
     "@adobe/helix-shared-utils": "2.1.0",
     "@adobe/helix-shared-wrap": "1.0.5",
-    "@adobe/helix-status": "9.2.14",
+    "@adobe/helix-status": "9.2.15",
     "@adobe/helix-universal-logger": "2.0.13"
   },
   "devDependencies": {
