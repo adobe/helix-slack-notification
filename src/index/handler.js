@@ -22,12 +22,12 @@ const FORMATTERS = {
  * @param {object} config operation configuration, may be undefined
  * @param {object} projectConfig project configuration
  * @param {object} payload payload received from SQS
- * @param {object} slack interface to post slack messages in the respective project
+ * @param {import('../support/Slack.js').default} slack slack interface
  * @param {object} log logger
  */
 export default async function handle(config, projectConfig, payload, slack, log) {
   if (!config) {
-    log.info('Index notification handler requires a configuration, notification ignored.');
+    log.info('Index notification handler requires a configuration in \'notify\', notification ignored.');
     return;
   }
 

@@ -36,9 +36,17 @@ describe('Slack Tests', () => {
   it('posts a message to slack bot', async () => {
     nock('https://lqmig3v5eb.execute-api.us-east-1.amazonaws.com')
       .post('/slack/slack-bot/v4/notify')
-      .reply(200, [{
-        status: 200,
-      }]);
+      .reply((_, body) => {
+        assert.deepStrictEqual(body, {
+          channels: ['T/C'],
+          message: {
+            text: 'hello world',
+          },
+        });
+        return [200, [{
+          status: 200,
+        }]];
+      });
 
     const slack = new Slack('T/C', 'webhook-secret', console);
     const result = await slack.post({
@@ -50,9 +58,18 @@ describe('Slack Tests', () => {
   it('posts an update to an existing message to slack bot', async () => {
     nock('https://lqmig3v5eb.execute-api.us-east-1.amazonaws.com')
       .post('/slack/slack-bot/v4/notify')
-      .reply(200, [{
-        status: 200,
-      }]);
+      .reply((_, body) => {
+        assert.deepStrictEqual(body, {
+          channels: ['T/C'],
+          message: {
+            text: 'hello world',
+          },
+          ts: '1',
+        });
+        return [200, [{
+          status: 200,
+        }]];
+      });
 
     const slack = new Slack('T/C', 'webhook-secret', console);
     const result = await slack.update({

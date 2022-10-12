@@ -13,7 +13,7 @@
 /**
  * Notify slack in a specific format.
  *
- * @param {object} config operation configuration
+ * @param {object} config operation configuration, may be undefined
  * @param {object} projectConfig project configuration
  * @param {object} payload payload received from SQS
  * @param {import('../support/Slack.js').default} slack slack interface

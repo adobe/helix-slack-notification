@@ -60,7 +60,7 @@ describe('Index Tests', () => {
     assert.strictEqual(result.status, 200);
   });
 
-  it('index function handles a missing slack channel gracefully', async () => {
+  it('index function handles a missing slack configuration gracefully', async () => {
     nock.fstab();
     nock.helixConfig({
       data: [{}],
