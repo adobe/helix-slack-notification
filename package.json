@@ -6,8 +6,8 @@
   "main": "src/index.js",
   "type": "module",
   "scripts": {
-    "test": "c8 mocha  -i -g 'Post-Deploy'",
-    "test-ci": "c8 mocha  -i -g 'Post-Deploy' && codecov",
+    "test": "c8 mocha  -i -g 'Post-Deploy' --spec=test/**/*.test.js",
+    "test-ci": "c8 mocha  -i -g 'Post-Deploy' --spec=test/**/*.test.js && codecov",
     "test-postdeploy": "mocha -g 'Post-Deploy'",
     "lint": "eslint .",
     "semantic-release": "semantic-release",
@@ -31,7 +31,6 @@
       "test/setup-env.js"
     ],
     "recursive": "true",
-    "spec": "test/**/*.test.js",
     "reporter": "mocha-multi-reporters",
     "reporter-options": "configFile=.mocha-multi.json",
     "loader": "esmock"

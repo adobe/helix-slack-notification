@@ -27,17 +27,46 @@ export default class Slack {
       .digest('hex');
   }
 
+  /**
+   * Post a message to some channel, creating a new entry
+   *
+   * @param {any} message message in Slack blocks
+   * @returns result
+   */
   async post(message) {
+    return this._postToBot(JSON.stringify({
+      channels: [this._config],
+      message,
+    }));
+  }
+
+  /**
+   * Update an exsting message in some channel
+   *
+   * @param {any} message message in Slack blocks
+   * @param {string} ts message id
+   * @returns result
+   */
+  async update(message, ts) {
+    return this._postToBot(JSON.stringify({
+      channels: [this._config],
+      message,
+      ts,
+    }));
+  }
+
+  /**
+   * Post to the bot (internal implementation).
+   *
+   * @param {string} body stringified JSON body
+   * @returns false or {object} if successful
+   */
+  async _postToBot(body) {
     const [, channel] = this._config.split('/');
     if (!channel) {
       this._log.info(`No team id and channel in slack configuration: ${this._config}`);
       return false;
     }
-
-    const body = JSON.stringify({
-      channels: [this._config],
-      message,
-    });
 
     const signature = this.generateSignature(body);
 

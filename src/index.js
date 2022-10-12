@@ -16,7 +16,14 @@ import { Response } from '@adobe/fetch';
 
 import { fetchProjectConfig } from '@adobe/helix-admin-support';
 import Slack from './support/Slack.js';
-import HANDLERS from './handlers/index.js';
+
+import convert from './convert/handler.js';
+import index from './index/handler.js';
+
+const HANDLERS = {
+  'convert-update': convert,
+  'index-published': index,
+};
 
 /**
  * Handle a single notification received via SQS.
@@ -25,6 +32,7 @@ async function handleNotification(payload, env, log) {
   const {
     owner, repo, ref, op,
   } = payload;
+
   log.info(`Received '${op}' notification for: ${owner}/${repo}/${ref}`);
 
   const ctx = { attributes: [], env, log };
@@ -37,10 +45,6 @@ async function handleNotification(payload, env, log) {
     log.warn(`Unable to load project configuration for: ${owner}/${repo}/${ref}, ignored.`);
     return;
   }
-  if (!projectConfig.notify) {
-    log.info('Project configuration has no notify section, ignored.');
-    return;
-  }
 
   const { slack: slackConfig } = projectConfig;
   if (!slackConfig) {
@@ -48,14 +52,14 @@ async function handleNotification(payload, env, log) {
     return;
   }
 
-  const handler = HANDLERS.get(op);
+  const handler = HANDLERS[op];
   if (!handler) {
     log.warn(`Unknown operation in notification: ${op}, ignored.`);
     return;
   }
 
   const slack = new Slack(slackConfig, env.SLACK_NOTIFY_WEBHOOK_SECRET, log);
-  await handler(projectConfig.notify[op], projectConfig, payload, slack, log);
+  await handler(projectConfig?.notify?.[op], projectConfig, payload, slack, log);
 }
 
 /**

@@ -10,10 +10,21 @@
  * governing permissions and limitations under the License.
  */
 
-import IndexPublished from './IndexPublished.js';
-
-const HANDLERS = new Map([
-  ['index-published', IndexPublished],
-]);
-
-export default HANDLERS;
+/**
+ * Notify slack in a specific format.
+ *
+ * @param {object} config operation configuration
+ * @param {object} projectConfig project configuration
+ * @param {object} payload payload received from SQS
+ * @param {import('../support/Slack.js').default} slack slack interface
+ * @param {object} log logger
+ */
+export default async function handle(config, projectConfig, payload, slack) {
+  const {
+    notification: {
+      status: { message: text },
+      userData: { ts },
+    },
+  } = payload;
+  return slack.update({ text }, ts);
+}
