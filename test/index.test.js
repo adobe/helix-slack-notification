@@ -26,7 +26,11 @@ describe('Index Tests', () => {
     nock.done();
   });
 
-  const env = {};
+  const env = {
+    AWS_S3_REGION: 'us-east-1',
+    AWS_S3_ACCESS_KEY_ID: 'access-key-id',
+    AWS_S3_SECRET_ACCESS_KEY: 'secret-access-key',
+  };
 
   it('index function returns 204 when no notifications are available', async () => {
     const result = await main(new Request('https://localhost/'), {});
