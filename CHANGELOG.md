@@ -1,3 +1,10 @@
+# [1.3.0](https://github.com/adobe/helix-slack-notification/compare/v1.2.11...v1.3.0) (2022-10-13)
+
+
+### Features
+
+* add convert group ([#114](https://github.com/adobe/helix-slack-notification/issues/114)) ([57f7e09](https://github.com/adobe/helix-slack-notification/commit/57f7e09f707847c829d3fc237df65f31c2774efb))
+
 ## [1.2.11](https://github.com/adobe/helix-slack-notification/compare/v1.2.10...v1.2.11) (2022-10-11)
 
 
