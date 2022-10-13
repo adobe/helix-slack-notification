@@ -9,21 +9,31 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
+import defaultFormatter from './default-formatter.js';
+import multilangFormatter from './multilang-formatter.js';
 
-import FORMATTERS from '../formatters/index.js';
+const FORMATTERS = {
+  default: defaultFormatter,
+  'multi-language-blog': multilangFormatter,
+};
 
 /**
  * Notify slack in a specific format.
- * @param {object} config operation configuration
+ * @param {object} config operation configuration, may be undefined
  * @param {object} projectConfig project configuration
  * @param {object} payload payload received from SQS
- * @param {object} slack interface to post slack messages in the respective project
+ * @param {import('../support/Slack.js').default} slack slack interface
  * @param {object} log logger
  */
 export default async function handle(config, projectConfig, payload, slack, log) {
+  if (!config) {
+    log.info('Index notification handler requires a configuration in \'notify\', notification ignored.');
+    return;
+  }
+
   const { format } = config;
 
-  const formatter = FORMATTERS.get(format);
+  const formatter = FORMATTERS[format];
   if (!formatter) {
     log.warn(`Unknown formatter: ${format}, ignored.`);
     return;
