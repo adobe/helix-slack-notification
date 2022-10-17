@@ -1,3 +1,10 @@
+## [1.3.7](https://github.com/adobe/helix-slack-notification/compare/v1.3.6...v1.3.7) (2022-10-17)
+
+
+### Bug Fixes
+
+* use channel from notification to determine T/C ([7682602](https://github.com/adobe/helix-slack-notification/commit/76826023956025e2e27654ff57c96017c8cfcc99))
+
 ## [1.3.6](https://github.com/adobe/helix-slack-notification/compare/v1.3.5...v1.3.6) (2022-10-17)
 
 
