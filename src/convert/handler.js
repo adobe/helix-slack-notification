@@ -19,12 +19,17 @@
  * @param {import('../support/Slack.js').default} slack slack interface
  * @param {object} log logger
  */
-export default async function handle(config, projectConfig, payload, slack) {
+export default async function handle(config, projectConfig, payload, slack, log) {
+  if (!payload.result) {
+    log.warn('Payload has no \'result\' entry, ignored.');
+    return;
+  }
+
   const {
     notification: {
       status: { message: text },
       userData: { ts },
     },
-  } = payload;
-  return slack.update({ text }, ts);
+  } = payload.result;
+  await slack.update({ text }, ts);
 }

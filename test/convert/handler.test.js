@@ -25,6 +25,21 @@ describe('Convert Handler Tests', () => {
     nock.done();
   });
 
+  it('convert handles a missing result in the payload gracefully', async () => {
+    await convert({}, {}, {
+      owner: 'owner',
+      repo: 'repo',
+      ref: 'ref',
+      op: 'convert-update',
+      notification: {
+        status: { message: 'Transcoding 50%' },
+        userData: { ts: '2' },
+      },
+    }, {
+      post: () => assert.fail('Nothing should be posted to Slack'),
+    }, console);
+  });
+
   it('convert successfully notifies', async () => {
     const messages = [
       { ts: '1', text: 'first message' },
@@ -35,9 +50,11 @@ describe('Convert Handler Tests', () => {
       repo: 'repo',
       ref: 'ref',
       op: 'convert-update',
-      notification: {
-        status: { message: 'Transcoding 50%' },
-        userData: { ts: '2' },
+      result: {
+        notification: {
+          status: { message: 'Transcoding 50%' },
+          userData: { ts: '2' },
+        },
       },
     }, {
       update: (({ text }, ts) => {
