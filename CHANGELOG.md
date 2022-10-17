@@ -1,3 +1,10 @@
+## [1.3.6](https://github.com/adobe/helix-slack-notification/compare/v1.3.5...v1.3.6) (2022-10-17)
+
+
+### Bug Fixes
+
+* notifier automatically adds a result ([8ac718c](https://github.com/adobe/helix-slack-notification/commit/8ac718cb319c303b6f88bbf43d6b32628c4d2de0))
+
 ## [1.3.5](https://github.com/adobe/helix-slack-notification/compare/v1.3.4...v1.3.5) (2022-10-15)
 
 
