@@ -15,7 +15,7 @@ import { fetch } from './utils.js';
 
 export default class Slack {
   constructor(config, notifySecret, log) {
-    this._config = config;
+    this._channels = Array.isArray(config) ? config : [config];
     this._notifySecret = notifySecret;
     this._log = log;
   }
@@ -28,14 +28,14 @@ export default class Slack {
   }
 
   /**
-   * Post a message to some channel, creating a new entry
+   * Post a message to some or all channels, creating a new entry
    *
    * @param {any} message message in Slack blocks
    * @returns result
    */
-  async post(message) {
+  async post(message, channel = undefined) {
     return this._postToBot(JSON.stringify({
-      channels: [this._config],
+      channels: channel ? [channel] : this._channels,
       message,
     }));
   }
@@ -45,11 +45,12 @@ export default class Slack {
    *
    * @param {any} message message in Slack blocks
    * @param {string} ts message id
+   * @param channel channel
    * @returns result
    */
-  async update(message, ts) {
+  async update(message, ts, channel) {
     return this._postToBot(JSON.stringify({
-      channels: [this._config],
+      channels: [channel],
       message,
       ts,
     }));
@@ -62,7 +63,7 @@ export default class Slack {
    * @returns false or {object} if successful
    */
   async _postToBot(body) {
-    const [, channel] = this._config.split('/');
+    const [, channel] = this.channels[0].split('/');
     if (!channel) {
       this._log.info(`No team id and channel in slack configuration: ${this._config}`);
       return false;
@@ -81,17 +82,21 @@ export default class Slack {
       },
     });
     if (!res.ok) {
-      this._log.info(`Unable to notify slack channel [${this._config}], HTTP failure (${res.status})`, await res.text());
+      this._log.info(`Unable to notify slack channels ${this.channels}, HTTP failure (${res.status})`, await res.text());
       return false;
     }
     const json = await res.json();
 
     const [result] = json;
     if (result.status !== 200) {
-      this._log.info(`Unable to notify slack channel[${this._config}], status returned: ${result.status}`);
+      this._log.info(`Unable to notify slack channels ${this.channels}, status returned: ${result.status}`);
       return false;
     }
-    this._log.info(`Successfully notified slack channel[${this._config}]`);
+    this._log.info(`Successfully notified slack channels [${this.channels}]`);
     return result;
+  }
+
+  get channels() {
+    return this._channels;
   }
 }

@@ -28,8 +28,8 @@ export default async function handle(config, projectConfig, payload, slack, log)
   const {
     notification: {
       status: { message: text },
-      userData: { ts },
+      userData: { ts, channel },
     },
   } = payload.result;
-  await slack.update({ text }, ts);
+  await slack.update({ text }, ts, channel);
 }
