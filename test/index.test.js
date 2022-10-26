@@ -33,7 +33,9 @@ describe('Index Tests', () => {
   };
 
   it('index function returns 204 when no notifications are available', async () => {
-    const result = await main(new Request('https://localhost/'), {});
+    const result = await main(new Request('https://localhost/'), {
+      log: console,
+    });
     assert.strictEqual(result.status, 204);
   });
 
@@ -42,6 +44,7 @@ describe('Index Tests', () => {
       records: [{
         body: 'this is not JSON',
       }],
+      log: console,
     });
     assert.strictEqual(result.status, 200);
   });
@@ -60,6 +63,7 @@ describe('Index Tests', () => {
         }),
       }],
       env,
+      log: console,
     });
     assert.strictEqual(result.status, 200);
   });
@@ -80,6 +84,7 @@ describe('Index Tests', () => {
         }),
       }],
       env,
+      log: console,
     });
     assert.strictEqual(result.status, 200);
   });
@@ -102,6 +107,7 @@ describe('Index Tests', () => {
         }),
       }],
       env,
+      log: console,
     });
     assert.strictEqual(result.status, 200);
   });
@@ -124,6 +130,7 @@ describe('Index Tests', () => {
         }),
       }],
       env,
+      log: console,
     });
     assert.strictEqual(result.status, 200);
   });
@@ -148,6 +155,7 @@ describe('Index Tests', () => {
         }),
       }],
       env,
+      log: console,
     });
     assert.strictEqual(result.status, 200);
   });

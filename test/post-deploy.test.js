@@ -20,7 +20,7 @@ const { expect } = chai;
 
 createTargets().forEach((target) => {
   describe(`Post-Deploy Tests (${target.title()})`, () => {
-    it('Purge a blog post', async () => {
+    it('Send an empty notification, should return a 204', async () => {
       await chai
         .request(target.host())
         .get(target.urlPath())
