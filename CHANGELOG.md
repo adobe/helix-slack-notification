@@ -1,3 +1,10 @@
+## [1.3.10](https://github.com/adobe/helix-slack-notification/compare/v1.3.9...v1.3.10) (2022-10-26)
+
+
+### Bug Fixes
+
+* use standard AWS log ([#129](https://github.com/adobe/helix-slack-notification/issues/129)) ([57b109f](https://github.com/adobe/helix-slack-notification/commit/57b109fdd4f97190b14b8a41a41fd809e578c767))
+
 ## [1.3.9](https://github.com/adobe/helix-slack-notification/compare/v1.3.8...v1.3.9) (2022-10-26)
 
 
