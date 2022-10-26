@@ -86,4 +86,8 @@ async function run(request, context) {
 }
 
 export const main = wrap(run)
-  .with(status);
+  .with(status)
+  .with((fn) => (req, context) => {
+    context.log = console;
+    return fn(req, context);
+  });
