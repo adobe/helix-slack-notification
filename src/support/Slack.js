@@ -13,10 +13,16 @@
 import crypto from 'crypto';
 import { fetch } from './utils.js';
 
+/**
+ * Default notification URL.
+ */
+const DEFAULT_NOTIFY_URL = 'https://lqmig3v5eb.execute-api.us-east-1.amazonaws.com/slack/slack-bot/v4/notify';
+
 export default class Slack {
-  constructor(config, notifySecret, log) {
+  constructor(config, projectConfig, notifySecret, log) {
     this._channels = Array.isArray(config) ? config : [config];
     this._notifySecret = notifySecret;
+    this._notifyUrl = projectConfig.notify?.slack?.url ?? DEFAULT_NOTIFY_URL;
     this._log = log;
   }
 
@@ -72,7 +78,7 @@ export default class Slack {
     const signature = this.generateSignature(body);
 
     // hard-coded endpoint until slack-bot can be called directly
-    const res = await fetch('https://lqmig3v5eb.execute-api.us-east-1.amazonaws.com/slack/slack-bot/v4/notify', {
+    const res = await fetch(this._notifyUrl, {
       method: 'POST',
       cache: 'no-store',
       body,

@@ -57,7 +57,7 @@ async function handleNotification(payload, env, log) {
     return;
   }
 
-  const slack = new Slack(slackConfig, env.SLACK_NOTIFY_WEBHOOK_SECRET, log);
+  const slack = new Slack(slackConfig, projectConfig, env.SLACK_NOTIFY_WEBHOOK_SECRET, log);
   await handler(projectConfig?.notify?.[op], projectConfig, payload, slack, log);
 }
 

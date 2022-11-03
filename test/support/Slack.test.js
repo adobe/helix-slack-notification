@@ -26,7 +26,7 @@ describe('Slack Tests', () => {
   });
 
   it('handles a bad slack configuration', async () => {
-    const slack = new Slack('T', '', console);
+    const slack = new Slack('T', {}, '', console);
     const result = await slack.post({
       text: 'hello world',
     });
@@ -48,7 +48,7 @@ describe('Slack Tests', () => {
         }]];
       });
 
-    const slack = new Slack(['T1/C1', 'T2/C2'], 'webhook-secret', console);
+    const slack = new Slack(['T1/C1', 'T2/C2'], {}, 'webhook-secret', console);
     const result = await slack.post({
       text: 'hello world',
     });
@@ -70,14 +70,43 @@ describe('Slack Tests', () => {
         }]];
       });
 
-    const slack = new Slack(['T1/C1', 'T2/C2'], 'webhook-secret', console);
+    const slack = new Slack(['T1/C1', 'T2/C2'], {}, 'webhook-secret', console);
     const result = await slack.post({
       text: 'hello world',
     }, 'T1/C1');
     assert.strictEqual(result.status, 200);
   });
 
-  it('pdates an existing message', async () => {
+  it('posts a message to a custom notify endpoint', async () => {
+    const notifyUrl = new URL('https://custom.ngrok.io/notify');
+
+    nock(notifyUrl.origin)
+      .post(notifyUrl.pathname)
+      .reply((_, body) => {
+        assert.deepStrictEqual(body, {
+          channels: ['T1/C1'],
+          message: {
+            text: 'hello world',
+          },
+        });
+        return [200, [{
+          status: 200,
+        }]];
+      });
+
+    const slack = new Slack(
+      ['T1/C1', 'T2/C2'],
+      { notify: { slack: { url: notifyUrl.href } } },
+      'webhook-secret',
+      console,
+    );
+    const result = await slack.post({
+      text: 'hello world',
+    }, 'T1/C1');
+    assert.strictEqual(result.status, 200);
+  });
+
+  it('updates an existing message', async () => {
     nock('https://lqmig3v5eb.execute-api.us-east-1.amazonaws.com')
       .post('/slack/slack-bot/v4/notify')
       .reply((_, body) => {
@@ -93,7 +122,7 @@ describe('Slack Tests', () => {
         }]];
       });
 
-    const slack = new Slack(['T1/C1', 'T2/C2'], 'webhook-secret', console);
+    const slack = new Slack(['T1/C1', 'T2/C2'], {}, 'webhook-secret', console);
     const result = await slack.update({
       text: 'hello world',
     }, '1.2', 'T1/C1');
@@ -105,7 +134,7 @@ describe('Slack Tests', () => {
       .post('/slack/slack-bot/v4/notify')
       .reply(403);
 
-    const slack = new Slack('T/C', 'webhook-secret', console);
+    const slack = new Slack('T/C', {}, 'webhook-secret', console);
     const result = await slack.update({
       text: 'hello world',
     }, '1');
@@ -119,7 +148,7 @@ describe('Slack Tests', () => {
         status: 404,
       }]);
 
-    const slack = new Slack('T/C', 'webhook-secret', console);
+    const slack = new Slack('T/C', {}, 'webhook-secret', console);
     const result = await slack.update({
       text: 'hello world',
     }, '1');
