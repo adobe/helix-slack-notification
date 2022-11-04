@@ -1,3 +1,10 @@
+# [1.5.0](https://github.com/adobe/helix-slack-notification/compare/v1.4.0...v1.5.0) (2022-11-04)
+
+
+### Features
+
+* support cron ([#134](https://github.com/adobe/helix-slack-notification/issues/134)) ([f37c37d](https://github.com/adobe/helix-slack-notification/commit/f37c37d09407b8308870bece7835476063ce8867))
+
 # [1.4.0](https://github.com/adobe/helix-slack-notification/compare/v1.3.11...v1.4.0) (2022-11-03)
 
 
