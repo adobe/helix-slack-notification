@@ -17,10 +17,12 @@ import { fetchProjectConfig } from '@adobe/helix-admin-support';
 import Slack from './support/Slack.js';
 
 import convert from './convert/handler.js';
+import cron from './cron/handler.js';
 import index from './index/handler.js';
 
 const HANDLERS = {
   'convert-update': convert,
+  'cron-process': cron,
   'index-published': index,
 };
 
