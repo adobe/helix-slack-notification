@@ -1,3 +1,10 @@
+# [1.6.0](https://github.com/adobe/helix-slack-notification/compare/v1.5.1...v1.6.0) (2022-11-09)
+
+
+### Features
+
+* handle FIFO messages ([#137](https://github.com/adobe/helix-slack-notification/issues/137)) ([61e6569](https://github.com/adobe/helix-slack-notification/commit/61e6569340bcd0c80e57531035c4e271023ca06e))
+
 ## [1.5.1](https://github.com/adobe/helix-slack-notification/compare/v1.5.0...v1.5.1) (2022-11-05)
 
 
