@@ -141,10 +141,12 @@ describe('Index Tests', () => {
     const result = await main(new Request('https://localhost/'), {
       records: [{
         body: JSON.stringify({
-          owner: 'owner',
-          repo: 'repo',
-          ref: 'ref',
-          op: 'index-published',
+          Message: JSON.stringify({
+            owner: 'owner',
+            repo: 'repo',
+            ref: 'ref',
+            op: 'index-published',
+          }),
         }),
       }],
       env,

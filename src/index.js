@@ -75,10 +75,12 @@ async function run(request, context) {
     // typically, this happens when the function isn't triggered by SQS but invoked "manually"
     return new Response('', { status: 204 });
   }
-
   await Promise.all(records.map(async ({ body }) => {
     try {
-      const payload = JSON.parse(body);
+      let payload = JSON.parse(body);
+      if (payload.Message) {
+        payload = JSON.parse(payload.Message);
+      }
       await handleNotification(payload, context.env, log);
     } catch (e) {
       log.warn(`Unable to handle notification: [${body}]`, e);
