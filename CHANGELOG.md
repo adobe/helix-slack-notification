@@ -1,3 +1,10 @@
+# [1.7.0](https://github.com/adobe/helix-slack-notification/compare/v1.6.1...v1.7.0) (2022-11-17)
+
+
+### Features
+
+* add reuse flag ([#141](https://github.com/adobe/helix-slack-notification/issues/141)) ([e1c2a97](https://github.com/adobe/helix-slack-notification/commit/e1c2a97157437a394f851c5951b8d301801aa1bc))
+
 ## [1.6.1](https://github.com/adobe/helix-slack-notification/compare/v1.6.0...v1.6.1) (2022-11-12)
 
 
