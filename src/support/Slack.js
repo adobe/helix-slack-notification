@@ -39,11 +39,15 @@ export default class Slack {
    * @param {any} message message in Slack blocks
    * @returns result
    */
-  async post(message, channel = undefined) {
-    return this._postToBot(JSON.stringify({
+  async post(message, channel = undefined, reuse = undefined) {
+    const payload = {
       channels: channel ? [channel] : this._channels,
       message,
-    }));
+    };
+    if (reuse !== undefined) {
+      payload.reuse = reuse;
+    }
+    return this._postToBot(JSON.stringify(payload));
   }
 
   /**

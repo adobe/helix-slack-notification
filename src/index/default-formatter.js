@@ -36,6 +36,6 @@ export default async function notify(projectConfig, payload, slack) {
     text: items.map((item) => `- ${item}`).join('\n'),
     unfurl_links: false,
     unfurl_media: false,
-    ts: result.ts,
+    thread_ts: result.ts,
   });
 }

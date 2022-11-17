@@ -11,7 +11,7 @@
  */
 
 /**
- * Notify slack in a specific format.
+ * Handles cron processing of files.
  *
  * @param {object} config operation configuration, may be undefined
  * @param {object} projectConfig project configuration
@@ -32,22 +32,32 @@ export default async function handle(config, projectConfig, payload, slack, log)
     },
   } = payload.result;
 
+  const metadata = {
+    event_type: payload.op,
+    event_payload: {
+      path,
+    },
+  };
+
   if (results.length === 0) {
     await slack.post({
       text: `Processed \`${path}\` - no failures reported :white_check_mark:`,
-    });
+      metadata,
+    }, undefined, true);
   } else if (!results[0].command) {
     await slack.post({
       text: `:x: Unable to process \`${path}\`: ${results[0].failure}`,
+      metadata,
     });
   } else {
     const result = await slack.post({
       text: `:x: Processing \`${path}\` reported the following failures`,
+      metadata,
     });
     const lines = results.map(({ command, failure }) => `\`${command}\`: ${failure}`);
     await slack.post({
       text: lines.map((line) => `- ${line}`).join('\n'),
-      ts: result.ts,
+      thread_ts: result.ts,
     });
   }
 }
