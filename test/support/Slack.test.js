@@ -64,6 +64,7 @@ describe('Slack Tests', () => {
           message: {
             text: 'hello world',
           },
+          reuse: true,
         });
         return [200, [{
           status: 200,
@@ -73,7 +74,7 @@ describe('Slack Tests', () => {
     const slack = new Slack(['T1/C1', 'T2/C2'], {}, 'webhook-secret', console);
     const result = await slack.post({
       text: 'hello world',
-    }, 'T1/C1');
+    }, 'T1/C1', true);
     assert.strictEqual(result.status, 200);
   });
 

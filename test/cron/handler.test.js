@@ -30,7 +30,7 @@ describe('Cron Handler Tests', () => {
       owner: 'owner',
       repo: 'repo',
       ref: 'ref',
-      op: 'convert-update',
+      op: 'cron-process',
       notification: {
         status: { message: 'Transcoding 50%' },
         userData: { ts: '2' },
