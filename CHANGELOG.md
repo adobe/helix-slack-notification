@@ -1,3 +1,10 @@
+## [1.7.1](https://github.com/adobe/helix-slack-notification/compare/v1.7.0...v1.7.1) (2022-11-18)
+
+
+### Bug Fixes
+
+* remove with(console) from index ([1ee59a0](https://github.com/adobe/helix-slack-notification/commit/1ee59a0030cce09abf416c3413b3ddae7cd6c36b))
+
 # [1.7.0](https://github.com/adobe/helix-slack-notification/compare/v1.6.1...v1.7.0) (2022-11-17)
 
 
