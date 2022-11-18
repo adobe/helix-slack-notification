@@ -1,3 +1,10 @@
+## [1.7.2](https://github.com/adobe/helix-slack-notification/compare/v1.7.1...v1.7.2) (2022-11-18)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @adobe/helix-shared-utils to v2.2.0 ([6375944](https://github.com/adobe/helix-slack-notification/commit/6375944f767219454d53a86b107cf37770e0f8d3))
+
 ## [1.7.1](https://github.com/adobe/helix-slack-notification/compare/v1.7.0...v1.7.1) (2022-11-18)
 
 
