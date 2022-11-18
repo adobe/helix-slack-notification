@@ -31,9 +31,10 @@ describe('Index Tests', () => {
     AWS_S3_ACCESS_KEY_ID: 'access-key-id',
     AWS_S3_SECRET_ACCESS_KEY: 'secret-access-key',
   };
+  const log = console;
 
   it('index function returns 204 when no notifications are available', async () => {
-    const result = await main(new Request('https://localhost/'), {});
+    const result = await main(new Request('https://localhost/'), { log });
     assert.strictEqual(result.status, 204);
   });
 
@@ -42,6 +43,7 @@ describe('Index Tests', () => {
       records: [{
         body: 'this is not JSON',
       }],
+      log,
     });
     assert.strictEqual(result.status, 200);
   });
@@ -60,6 +62,7 @@ describe('Index Tests', () => {
         }),
       }],
       env,
+      log,
     });
     assert.strictEqual(result.status, 200);
   });
@@ -80,6 +83,7 @@ describe('Index Tests', () => {
         }),
       }],
       env,
+      log,
     });
     assert.strictEqual(result.status, 200);
   });
@@ -102,6 +106,7 @@ describe('Index Tests', () => {
         }),
       }],
       env,
+      log,
     });
     assert.strictEqual(result.status, 200);
   });
@@ -124,6 +129,7 @@ describe('Index Tests', () => {
         }),
       }],
       env,
+      log,
     });
     assert.strictEqual(result.status, 200);
   });
@@ -150,6 +156,7 @@ describe('Index Tests', () => {
         }),
       }],
       env,
+      log,
     });
     assert.strictEqual(result.status, 200);
   });
