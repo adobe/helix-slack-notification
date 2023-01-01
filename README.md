@@ -25,3 +25,4 @@ For more, see the [API documentation](docs/API.md).
 ### Deploying Helix Slack Notification Service
 
 All commits to main that pass the testing will be deployed automatically. All commits to branches that will pass the testing will get commited as `/helix-services/slack-notification@ci<num>` and tagged with the CI build number.
+test
