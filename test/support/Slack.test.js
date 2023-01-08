@@ -35,7 +35,7 @@ describe('Slack Tests', () => {
 
   it('posts a message to all configured channels', async () => {
     nock('https://lqmig3v5eb.execute-api.us-east-1.amazonaws.com')
-      .post('/slack/slack-bot/v4/notify')
+      .post('/helix-services/slack-bot/v4/notify')
       .reply((_, body) => {
         assert.deepStrictEqual(body, {
           channels: ['T1/C1', 'T2/C2'],
@@ -57,7 +57,7 @@ describe('Slack Tests', () => {
 
   it('posts a message to some channel', async () => {
     nock('https://lqmig3v5eb.execute-api.us-east-1.amazonaws.com')
-      .post('/slack/slack-bot/v4/notify')
+      .post('/helix-services/slack-bot/v4/notify')
       .reply((_, body) => {
         assert.deepStrictEqual(body, {
           channels: ['T1/C1'],
@@ -109,7 +109,7 @@ describe('Slack Tests', () => {
 
   it('updates an existing message', async () => {
     nock('https://lqmig3v5eb.execute-api.us-east-1.amazonaws.com')
-      .post('/slack/slack-bot/v4/notify')
+      .post('/helix-services/slack-bot/v4/notify')
       .reply((_, body) => {
         assert.deepStrictEqual(body, {
           channels: ['T1/C1'],
@@ -132,7 +132,7 @@ describe('Slack Tests', () => {
 
   it('returns false when posting to slack bot fails (HTTP)', async () => {
     nock('https://lqmig3v5eb.execute-api.us-east-1.amazonaws.com')
-      .post('/slack/slack-bot/v4/notify')
+      .post('/helix-services/slack-bot/v4/notify')
       .reply(403);
 
     const slack = new Slack('T/C', {}, 'webhook-secret', console);
@@ -144,7 +144,7 @@ describe('Slack Tests', () => {
 
   it('returns false when posting to slack bot fails (Slack API)', async () => {
     nock('https://lqmig3v5eb.execute-api.us-east-1.amazonaws.com')
-      .post('/slack/slack-bot/v4/notify')
+      .post('/helix-services/slack-bot/v4/notify')
       .reply(200, [{
         status: 404,
       }]);
