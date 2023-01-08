@@ -1,3 +1,10 @@
+## [1.7.10](https://github.com/adobe/helix-slack-notification/compare/v1.7.9...v1.7.10) (2023-01-08)
+
+
+### Bug Fixes
+
+* use new slack-bot function location ([#164](https://github.com/adobe/helix-slack-notification/issues/164)) ([686bc5c](https://github.com/adobe/helix-slack-notification/commit/686bc5c1d1728d380c53ea5173bc7b7e6e2beb49))
+
 ## [1.7.9](https://github.com/adobe/helix-slack-notification/compare/v1.7.8...v1.7.9) (2022-12-26)
 
 
