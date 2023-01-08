@@ -16,7 +16,7 @@ import { fetch } from './utils.js';
 /**
  * Default notification URL.
  */
-const DEFAULT_NOTIFY_URL = 'https://lqmig3v5eb.execute-api.us-east-1.amazonaws.com/slack/slack-bot/v4/notify';
+const DEFAULT_NOTIFY_URL = 'https://lqmig3v5eb.execute-api.us-east-1.amazonaws.com/helix-services/slack-bot/v4/notify';
 
 export default class Slack {
   constructor(config, projectConfig, notifySecret, log) {
