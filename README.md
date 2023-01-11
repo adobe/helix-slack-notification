@@ -12,13 +12,11 @@ Subscribes to Helix Admin notifications and sends them to Slack channels. Gets [
 
 ## Installation
 
-## Usage
+The service uses the following environment variables:
 
-```bash
-curl https://helix-pages.anywhere.run/helix-services/slack-notification@v1
-```
-
-For more, see the [API documentation](docs/API.md).
+| Name  | Description  | Required | Default |
+|:------|:-------------|:---------|:--------|
+| SLACK_NOTIFY_WEBHOOK_SECRET | Slack Webhook Secret | Yes | - |
 
 ## Development
 
