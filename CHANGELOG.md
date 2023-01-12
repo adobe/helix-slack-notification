@@ -1,3 +1,10 @@
+## [1.7.11](https://github.com/adobe/helix-slack-notification/compare/v1.7.10...v1.7.11) (2023-01-12)
+
+
+### Bug Fixes
+
+* use node 18 ([#167](https://github.com/adobe/helix-slack-notification/issues/167)) ([0982d0b](https://github.com/adobe/helix-slack-notification/commit/0982d0b9cde954f7388f9575031b4162fc230258))
+
 ## [1.7.10](https://github.com/adobe/helix-slack-notification/compare/v1.7.9...v1.7.10) (2023-01-08)
 
 
