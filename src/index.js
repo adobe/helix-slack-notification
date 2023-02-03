@@ -10,7 +10,7 @@
  * governing permissions and limitations under the License.
  */
 import wrap from '@adobe/helix-shared-wrap';
-import { wrap as status } from '@adobe/helix-status';
+import { helixStatus } from '@adobe/helix-status';
 import { Response } from '@adobe/fetch';
 
 import { fetchProjectConfig } from '@adobe/helix-admin-support';
@@ -90,4 +90,4 @@ async function run(request, context) {
 }
 
 export const main = wrap(run)
-  .with(status);
+  .with(helixStatus);
