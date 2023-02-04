@@ -67,7 +67,7 @@
     "commitizen": "4.3.0",
     "cz-conventional-changelog": "3.3.0",
     "dotenv": "16.0.3",
-    "eslint": "8.32.0",
+    "eslint": "8.33.0",
     "esmock": "2.1.0",
     "husky": "8.0.3",
     "junit-report-builder": "3.0.1",
