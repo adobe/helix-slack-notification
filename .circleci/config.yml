@@ -6,25 +6,14 @@ executors:
 
 orbs:
   helix-post-deploy: adobe/helix-post-deploy@3.0.0
-  helix-gcloud-setup: adobe/helix-gcloud-setup@1.0.1
 
 commands:
   setup:
     steps:
       - checkout
-      - restore_cache:
-          keys:
-            - v3-dependencies-{{ arch }}-{{ checksum "package-lock.json" }}
-      - run:
-          name: ping npm@9.2.0 until npm/cli#6051 is fixed
-          command: npm -g install npm@9.2.0
       - run:
           name: Installing Dependencies
           command: npm ci
-      - save_cache:
-          paths:
-            - node_modules
-          key: v3-dependencies-{{ arch }}-{{ checksum "package-lock.json" }}
       - run:
           name: prepare test git user
           command: git config --global user.email "circleci@example.com" && git config --global user.name "CircleCi Build"
@@ -53,9 +42,7 @@ jobs:
       - run:
           name: revert changes to package-lock.json
           command: git checkout -- package-lock.json
-      - helix-post-deploy/config-wsk
       - helix-post-deploy/config-env
-      - helix-gcloud-setup/load-config
       - run:
           name: Semantic Release
           command: npm run semantic-release
@@ -77,8 +64,7 @@ jobs:
       - run:
           name: revert changes to package-lock.json
           command: git checkout -- package-lock.json
-      - helix-post-deploy/config-wsk
-      - helix-gcloud-setup/load-config
+      - helix-post-deploy/config-env
       - run:
           name: Branch Deployment
           command: npm run deploy-ci
