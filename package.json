@@ -47,7 +47,7 @@
   "homepage": "https://github.com/adobe/helix-slack-notification#readme",
   "dependencies": {
     "@adobe/fetch": "4.0.6",
-    "@adobe/helix-admin-support": "1.6.36",
+    "@adobe/helix-admin-support": "1.6.37",
     "@adobe/helix-shared-config": "10.0.2",
     "@adobe/helix-shared-utils": "3.0.0",
     "@adobe/helix-shared-wrap": "2.0.0",
@@ -55,7 +55,7 @@
   },
   "devDependencies": {
     "@adobe/eslint-config-helix": "2.0.2",
-    "@adobe/helix-deploy": "9.0.18",
+    "@adobe/helix-deploy": "9.0.19",
     "@adobe/helix-universal": "4.1.6",
     "@semantic-release/changelog": "6.0.3",
     "@semantic-release/exec": "6.0.3",
