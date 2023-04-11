@@ -50,7 +50,8 @@ describe('Index Tests', () => {
 
   it('index function handles a missing project configuration gracefully', async () => {
     nock.fstab();
-    nock.helixConfig({});
+    nock.helixConfig();
+    nock.helixConfigAll({});
 
     const result = await main(new Request('https://localhost/'), {
       records: [{
@@ -69,7 +70,8 @@ describe('Index Tests', () => {
 
   it('index function handles a missing slack configuration gracefully', async () => {
     nock.fstab();
-    nock.helixConfig({
+    nock.helixConfig();
+    nock.helixConfigAll({
       data: [{}],
     });
 
@@ -90,7 +92,8 @@ describe('Index Tests', () => {
 
   it('index function handles an unknown operation gracefully', async () => {
     nock.fstab();
-    nock.helixConfig({
+    nock.helixConfig();
+    nock.helixConfigAll({
       data: [{
         key: 'slack', value: 'T/C',
       }],
@@ -113,7 +116,8 @@ describe('Index Tests', () => {
 
   it('index function calls appropriate handler', async () => {
     nock.fstab();
-    nock.helixConfig({
+    nock.helixConfig();
+    nock.helixConfigAll({
       data: [{
         key: 'slack', value: 'T/C',
       }],
@@ -136,7 +140,8 @@ describe('Index Tests', () => {
 
   it('index function calls appropriate handler (with its configuration)', async () => {
     nock.fstab();
-    nock.helixConfig({
+    nock.helixConfig();
+    nock.helixConfigAll({
       data: [{
         key: 'slack', value: 'T/C',
       }, {
