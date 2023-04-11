@@ -48,7 +48,7 @@
   "dependencies": {
     "@adobe/fetch": "4.0.6",
     "@adobe/helix-admin-support": "2.1.1",
-    "@adobe/helix-shared-config": "10.0.2",
+    "@adobe/helix-shared-config": "10.0.3",
     "@adobe/helix-shared-utils": "3.0.0",
     "@adobe/helix-shared-wrap": "2.0.0",
     "@adobe/helix-status": "10.0.4"
