@@ -1,3 +1,10 @@
+## [1.7.37](https://github.com/adobe/helix-slack-notification/compare/v1.7.36...v1.7.37) (2023-04-12)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @adobe/fetch to v4.0.7 ([#223](https://github.com/adobe/helix-slack-notification/issues/223)) ([b843a2a](https://github.com/adobe/helix-slack-notification/commit/b843a2aafdef9871c48b4b6eab631b77cf69806d))
+
 ## [1.7.36](https://github.com/adobe/helix-slack-notification/compare/v1.7.35...v1.7.36) (2023-04-11)
 
 
