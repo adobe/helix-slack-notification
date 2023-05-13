@@ -68,7 +68,7 @@
     "cz-conventional-changelog": "3.3.0",
     "dotenv": "16.0.3",
     "eslint": "8.40.0",
-    "esmock": "2.2.1",
+    "esmock": "2.2.2",
     "husky": "8.0.3",
     "junit-report-builder": "3.0.1",
     "lint-staged": "13.2.2",
