@@ -51,8 +51,8 @@ export function Nock() {
     .get(`/${owner}/${repo}/main/fstab.yaml?x-id=GetObject`)
     .reply(200, fstab);
 
-  nocker.helixConfig = (config = '', owner = 'owner', repo = 'repo', ref = 'ref') => nocker('https://helix-code-bus.s3.us-east-1.amazonaws.com')
-    .get(`/${owner}/${repo}/${ref}/helix-config.json?x-id=GetObject`)
+  nocker.helixConfig = (config = '', owner = 'owner', repo = 'repo') => nocker('https://helix-code-bus.s3.us-east-1.amazonaws.com')
+    .get(`/${owner}/${repo}/main/helix-config.json?x-id=GetObject`)
     .reply(config ? 200 : 404, config);
 
   nocker.helixConfigAll = (data, contentBusId = '2dc2835c6ee5a4c81403901bf504d49fcc4b2a4c4f0d5378cc4bec82a6c') => nocker('https://helix-content-bus.s3.us-east-1.amazonaws.com')
