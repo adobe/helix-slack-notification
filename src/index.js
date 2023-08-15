@@ -34,12 +34,18 @@ async function handleNotification(payload, env, log) {
     owner, repo, ref, op,
   } = payload;
 
-  log.info(`Received '${op}' notification for: ${owner}/${repo}/${ref}`);
-
   const ctx = { attributes: [], env, log };
   const opts = {
     owner, repo, ref, path: '/',
   };
+
+  const handler = HANDLERS[op];
+  if (!handler) {
+    log.debug(`Unknown operation in notification: ${op}, ignored.`);
+    return;
+  }
+
+  log.info(`Received '${op}' notification for: ${owner}/${repo}/${ref}`);
 
   const projectConfig = await fetchProjectConfig(ctx, opts);
   if (!projectConfig) {
@@ -50,12 +56,6 @@ async function handleNotification(payload, env, log) {
   const { slack: slackConfig } = projectConfig;
   if (!slackConfig) {
     log.warn(`No slack channel configured for ${owner}/${repo}/${ref}, ignored.`);
-    return;
-  }
-
-  const handler = HANDLERS[op];
-  if (!handler) {
-    log.warn(`Unknown operation in notification: ${op}, ignored.`);
     return;
   }
 

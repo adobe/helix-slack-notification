@@ -81,7 +81,7 @@ describe('Index Tests', () => {
           owner: 'owner',
           repo: 'repo',
           ref: 'ref',
-          op: 'marge-said-hi',
+          op: 'convert-update',
         }),
       }],
       env,
@@ -91,14 +91,6 @@ describe('Index Tests', () => {
   });
 
   it('index function handles an unknown operation gracefully', async () => {
-    nock.fstab();
-    nock.helixConfig();
-    nock.helixConfigAll({
-      data: [{
-        key: 'slack', value: 'T/C',
-      }],
-    });
-
     const result = await main(new Request('https://localhost/'), {
       records: [{
         body: JSON.stringify({
