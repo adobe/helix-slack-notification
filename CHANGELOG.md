@@ -1,3 +1,10 @@
+## [1.7.70](https://github.com/adobe/helix-slack-notification/compare/v1.7.69...v1.7.70) (2023-08-15)
+
+
+### Bug Fixes
+
+* ignore operations that are not handled ([aef93fb](https://github.com/adobe/helix-slack-notification/commit/aef93fbea7221ce16b79a0ad0a79a643230d4154))
+
 ## [1.7.69](https://github.com/adobe/helix-slack-notification/compare/v1.7.68...v1.7.69) (2023-08-14)
 
 
