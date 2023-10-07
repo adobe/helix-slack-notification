@@ -61,13 +61,13 @@
     "@semantic-release/exec": "6.0.3",
     "@semantic-release/git": "10.0.1",
     "c8": "8.0.1",
-    "chai": "4.3.8",
+    "chai": "4.3.10",
     "chai-http": "4.4.0",
     "codecov": "3.8.3",
     "commitizen": "4.3.0",
     "cz-conventional-changelog": "3.3.0",
     "dotenv": "16.3.1",
-    "eslint": "8.49.0",
+    "eslint": "8.51.0",
     "esmock": "2.5.1",
     "husky": "8.0.3",
     "junit-report-builder": "3.0.1",
@@ -75,7 +75,7 @@
     "mocha": "10.2.0",
     "mocha-multi-reporters": "1.5.1",
     "nock": "13.3.3",
-    "semantic-release": "22.0.0"
+    "semantic-release": "22.0.5"
   },
   "lint-staged": {
     "*.js": "eslint"
