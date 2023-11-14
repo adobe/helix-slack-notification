@@ -1,3 +1,10 @@
+## [1.7.92](https://github.com/adobe/helix-slack-notification/compare/v1.7.91...v1.7.92) (2023-11-14)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @adobe/helix-admin-support to v2.3.2 ([08aa49b](https://github.com/adobe/helix-slack-notification/commit/08aa49b7aa1f3e93677b4c2a429e428bff8e35d2))
+
 ## [1.7.91](https://github.com/adobe/helix-slack-notification/compare/v1.7.90...v1.7.91) (2023-11-13)
 
 
