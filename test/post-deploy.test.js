@@ -11,18 +11,16 @@
  */
 
 /* eslint-env mocha */
-import chai from 'chai';
+import * as chai from 'chai';
 import chaiHttp from 'chai-http';
 import { createTargets } from './post-deploy-utils.js';
 
-chai.use(chaiHttp);
-const { expect } = chai;
+const { expect, request } = chai.use(chaiHttp);
 
 createTargets().forEach((target) => {
   describe(`Post-Deploy Tests (${target.title()})`, () => {
     it('Send an empty notification, should return a 204', async () => {
-      await chai
-        .request(target.host())
+      await request(target.host())
         .get(target.urlPath())
         .then((response) => {
           expect(response).to.have.status(204);
