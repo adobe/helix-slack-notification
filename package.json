@@ -68,13 +68,13 @@
     "cz-conventional-changelog": "3.3.0",
     "dotenv": "16.4.5",
     "eslint": "8.57.0",
-    "esmock": "2.6.3",
+    "esmock": "2.6.4",
     "husky": "9.0.11",
     "junit-report-builder": "3.2.1",
     "lint-staged": "15.2.2",
     "mocha": "10.3.0",
     "mocha-multi-reporters": "1.5.1",
-    "nock": "13.5.3",
+    "nock": "13.5.4",
     "semantic-release": "22.0.12"
   },
   "lint-staged": {
