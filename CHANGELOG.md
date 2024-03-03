@@ -1,3 +1,10 @@
+## [1.7.115](https://github.com/adobe/helix-slack-notification/compare/v1.7.114...v1.7.115) (2024-03-03)
+
+
+### Bug Fixes
+
+* **deps:** update adobe fixes ([5bcd90e](https://github.com/adobe/helix-slack-notification/commit/5bcd90e6516239259c9d16b9b9532f5340ed8cc3))
+
 ## [1.7.114](https://github.com/adobe/helix-slack-notification/compare/v1.7.113...v1.7.114) (2024-03-01)
 
 
