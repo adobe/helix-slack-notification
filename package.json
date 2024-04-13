@@ -75,7 +75,7 @@
     "mocha": "10.4.0",
     "mocha-multi-reporters": "1.5.1",
     "nock": "13.5.4",
-    "semantic-release": "23.0.7"
+    "semantic-release": "23.0.8"
   },
   "lint-staged": {
     "*.js": "eslint"
