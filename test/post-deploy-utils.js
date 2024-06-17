@@ -47,6 +47,14 @@ export class OpenwhiskTarget {
   enabled() {
     return true;
   }
+
+  url(path, query) {
+    const url = new URL(`${this.host()}${this.urlPath()}${path}`);
+    if (query) {
+      Object.entries(query).forEach(([name, value]) => url.searchParams.append(name, value));
+    }
+    return url;
+  }
 }
 
 export class AWSTarget extends OpenwhiskTarget {
