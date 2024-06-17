@@ -11,7 +11,6 @@
     "test-postdeploy": "mocha -g 'Post-Deploy'",
     "lint": "eslint .",
     "semantic-release": "semantic-release",
-    "commit": "git-cz",
     "build": "hedy -v",
     "deploy": "hedy -v --deploy --test",
     "deploy-routes": "hedy --no-build -no-hints -l major",
@@ -61,16 +60,11 @@
     "@semantic-release/exec": "6.0.3",
     "@semantic-release/git": "10.0.1",
     "c8": "10.0.0",
-    "chai": "5.1.1",
-    "chai-http": "5.0.0",
     "codecov": "3.8.3",
-    "commitizen": "4.3.0",
-    "cz-conventional-changelog": "3.3.0",
     "dotenv": "16.4.5",
     "eslint": "8.57.0",
     "esmock": "2.6.5",
     "husky": "9.0.11",
-    "junit-report-builder": "3.2.1",
     "lint-staged": "15.2.5",
     "mocha": "10.4.0",
     "mocha-multi-reporters": "1.5.1",
@@ -79,10 +73,5 @@
   },
   "lint-staged": {
     "*.js": "eslint"
-  },
-  "config": {
-    "commitizen": {
-      "path": "node_modules/cz-conventional-changelog"
-    }
   }
 }

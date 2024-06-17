@@ -11,22 +11,17 @@
  */
 
 /* eslint-env mocha */
-import * as chai from 'chai';
-import chaiHttp from 'chai-http';
+import assert from 'assert';
+import { h1 } from '@adobe/fetch';
 import { createTargets } from './post-deploy-utils.js';
 
-const { expect, request } = chai.use(chaiHttp);
+const { fetch } = h1();
 
 createTargets().forEach((target) => {
   describe(`Post-Deploy Tests (${target.title()})`, () => {
     it('Send an empty notification, should return a 204', async () => {
-      await request(target.host())
-        .get(target.urlPath())
-        .then((response) => {
-          expect(response).to.have.status(204);
-        }).catch((e) => {
-          throw e;
-        });
+      const ret = await fetch(target.url('/'));
+      assert.strictEqual(ret.status, 204);
     }).timeout(50000);
   });
 });
