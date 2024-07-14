@@ -1,6 +1,6 @@
 {
   "name": "@adobe/helix-slack-notification",
-  "version": "1.7.148",
+  "version": "1.7.149",
   "private": true,
   "description": "Helix Slack Notification Service",
   "main": "src/index.js",
