@@ -64,12 +64,12 @@
     "dotenv": "16.4.5",
     "eslint": "8.57.0",
     "esmock": "2.6.7",
-    "husky": "9.1.5",
+    "husky": "9.1.6",
     "lint-staged": "15.2.10",
     "mocha": "10.7.3",
     "mocha-multi-reporters": "1.5.1",
     "nock": "13.5.5",
-    "semantic-release": "24.1.0"
+    "semantic-release": "24.1.1"
   },
   "lint-staged": {
     "*.js": "eslint"
