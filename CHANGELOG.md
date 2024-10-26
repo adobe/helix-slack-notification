@@ -1,3 +1,10 @@
+## [1.7.172](https://github.com/adobe/[secure]-slack-notification/compare/v1.7.171...v1.7.172) (2024-10-26)
+
+
+### Bug Fixes
+
+* **deps:** update adobe fixes ([769ce68](https://github.com/adobe/[secure]-slack-notification/commit/769ce689df9d9fad76b09a80b45c7bbaeb63aa00))
+
 ## [1.7.171](https://github.com/adobe/[secure]-slack-notification/compare/v1.7.170...v1.7.171) (2024-10-20)
 
 
