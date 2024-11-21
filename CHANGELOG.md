@@ -1,3 +1,10 @@
+## [1.7.180](https://github.com/adobe/[secure]-slack-notification/compare/v1.7.179...v1.7.180) (2024-11-21)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @adobe/[secure]-admin-support to v3.1.0 ([#511](https://github.com/adobe/[secure]-slack-notification/issues/511)) ([4516197](https://github.com/adobe/[secure]-slack-notification/commit/4516197473e7cec37808bd4f36deef6dcb2dc580))
+
 ## [1.7.179](https://github.com/adobe/[secure]-slack-notification/compare/v1.7.178...v1.7.179) (2024-11-17)
 
 
