@@ -1,3 +1,10 @@
+## [1.7.207](https://github.com/adobe/[secure]-slack-notification/compare/v1.7.206...v1.7.207) (2025-02-04)
+
+
+### Bug Fixes
+
+* use node 20 on AWS ([7e7c8bc](https://github.com/adobe/[secure]-slack-notification/commit/7e7c8bcbd04851cd500e9d2c249105cfcac6843d))
+
 ## [1.7.206](https://github.com/adobe/[secure]-slack-notification/compare/v1.7.205...v1.7.206) (2025-02-04)
 
 
