@@ -1,3 +1,10 @@
+## [1.7.215](https://github.com/adobe/[secure]-slack-notification/compare/v1.7.214...v1.7.215) (2025-03-04)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @adobe/fetch to v4.2.0 ([#565](https://github.com/adobe/[secure]-slack-notification/issues/565)) ([176d50d](https://github.com/adobe/[secure]-slack-notification/commit/176d50d935ff4d4653a4375b257704f7b313d985))
+
 ## [1.7.214](https://github.com/adobe/[secure]-slack-notification/compare/v1.7.213...v1.7.214) (2025-03-04)
 
 
