@@ -1,3 +1,10 @@
+## [1.7.226](https://github.com/adobe/[secure]-slack-notification/compare/v1.7.225...v1.7.226) (2025-05-05)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @adobe/[secure]-shared-config to v11.1.5 ([#588](https://github.com/adobe/[secure]-slack-notification/issues/588)) ([af7cc46](https://github.com/adobe/[secure]-slack-notification/commit/af7cc46aae82914caa03759b14361d69dbc527a8))
+
 ## [1.7.225](https://github.com/adobe/[secure]-slack-notification/compare/v1.7.224...v1.7.225) (2025-04-29)
 
 
