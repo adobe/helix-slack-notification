@@ -1,3 +1,10 @@
+# [1.8.0](https://github.com/adobe/[secure]-slack-notification/compare/v1.7.231...v1.8.0) (2025-05-19)
+
+
+### Features
+
+* **deps:** update dependency @adobe/[secure]-deploy to v13 ([#598](https://github.com/adobe/[secure]-slack-notification/issues/598)) ([fdf7acd](https://github.com/adobe/[secure]-slack-notification/commit/fdf7acd3a7065b64d013e4f249ff459486e2a7e1))
+
 ## [1.7.231](https://github.com/adobe/[secure]-slack-notification/compare/v1.7.230...v1.7.231) (2025-05-13)
 
 
