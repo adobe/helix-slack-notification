@@ -51,13 +51,8 @@ jobs:
         with:
           parse-json-secrets: true
           secret-ids: |
-            ${{ env.AWS_DEPLOY_SECRET_ID }}
-      # see https://github.com/aws-actions/aws-secretsmanager-get-secrets/issues/11
-      - name: unprefix variables
-        run: |
-          for variable in "${!_HELIX_GITHUB_ACTION_SECRETS_@}"; do
-            echo "${variable#_HELIX_GITHUB_ACTION_SECRETS_}=${!variable}" >> $GITHUB_ENV
-          done
+            ,${{ env.AWS_DEPLOY_SECRET_ID }}
+
       - name: Branch Deployment
         run: npm run deploy-ci
       - name: Post-Deployment Integration Test
@@ -86,13 +81,7 @@ jobs:
         with:
           parse-json-secrets: true
           secret-ids: |
-            ${{ env.AWS_DEPLOY_SECRET_ID }}
-      # see https://github.com/aws-actions/aws-secretsmanager-get-secrets/issues/11
-      - name: unprefix variables
-        run: |
-          for variable in "${!_HELIX_GITHUB_ACTION_SECRETS_@}"; do
-            echo "${variable#_HELIX_GITHUB_ACTION_SECRETS_}=${!variable}" >> $GITHUB_ENV
-          done
+            ,${{ env.AWS_DEPLOY_SECRET_ID }}
 
       - name: Semantic Release
         run: npm run semantic-release
