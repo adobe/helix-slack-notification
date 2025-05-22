@@ -1,3 +1,10 @@
+## [1.8.3](https://github.com/adobe/helix-slack-notification/compare/v1.8.2...v1.8.3) (2025-05-22)
+
+
+### Bug Fixes
+
+* avoid unprefixing variables ([9996382](https://github.com/adobe/helix-slack-notification/commit/99963821af4afe1d2fe8d7315ed9b220f593bd9c))
+
 ## [1.8.2](https://github.com/adobe/[secure]-slack-notification/compare/v1.8.1...v1.8.2) (2025-05-20)
 
 
