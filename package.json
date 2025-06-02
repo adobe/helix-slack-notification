@@ -53,7 +53,7 @@
     "@adobe/helix-status": "10.1.5"
   },
   "devDependencies": {
-    "@adobe/eslint-config-helix": "2.0.9",
+    "@adobe/eslint-config-helix": "3.0.2",
     "@adobe/helix-deploy": "13.0.3",
     "@adobe/helix-universal": "5.2.2",
     "@semantic-release/changelog": "6.0.3",
