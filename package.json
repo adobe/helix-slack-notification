@@ -18,7 +18,7 @@
     "prepare": "husky install"
   },
   "wsk": {
-    "nodeVersion": 20,
+    "nodeVersion": 22,
     "name": "helix-services/slack-notification@${version}",
     "memory": 512,
     "awsRole!important": "arn:aws:iam::118435662149:role/helix-service-role-s3-rw",
