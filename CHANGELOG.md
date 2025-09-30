@@ -1,3 +1,10 @@
+## [1.8.28](https://github.com/adobe/helix-slack-notification/compare/v1.8.27...v1.8.28) (2025-09-30)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @adobe/helix-shared-config to v11.1.11 ([#659](https://github.com/adobe/helix-slack-notification/issues/659)) ([6233123](https://github.com/adobe/helix-slack-notification/commit/6233123e53d8ae21051371e7bcdfced46890da3e))
+
 ## [1.8.27](https://github.com/adobe/helix-slack-notification/compare/v1.8.26...v1.8.27) (2025-09-30)
 
 
