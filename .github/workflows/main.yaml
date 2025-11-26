@@ -19,9 +19,9 @@ jobs:
     steps:
       - uses: actions/checkout@v5
       - name: Use Node.js 22.x
-        uses: actions/setup-node@v5
+        uses: actions/setup-node@v6
         with:
-          node-version: '22.x'
+          node-version: '24.x'
       - run: npm install
       - run: npm test
       - uses: codecov/codecov-action@v5
@@ -36,9 +36,9 @@ jobs:
     steps:
       - uses: actions/checkout@v5
       - name: Use Node.js 22.x
-        uses: actions/setup-node@v5
+        uses: actions/setup-node@v6
         with:
-          node-version: '22.x'
+          node-version: '24.x'
       - run: npm install
 
       - name: Configure AWS Credentials
@@ -66,9 +66,9 @@ jobs:
     steps:
       - uses: actions/checkout@v5
       - name: Use Node.js 22.x
-        uses: actions/setup-node@v5
+        uses: actions/setup-node@v6
         with:
-          node-version: '22.x'
+          node-version: '24.x'
       - run: npm install
 
       - name: Configure AWS Credentials
