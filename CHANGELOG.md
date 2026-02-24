@@ -1,3 +1,10 @@
+## [1.8.40](https://github.com/adobe/helix-slack-notification/compare/v1.8.39...v1.8.40) (2026-02-24)
+
+
+### Bug Fixes
+
+* **deps:** update adobe fixes ([#713](https://github.com/adobe/helix-slack-notification/issues/713)) ([7acda01](https://github.com/adobe/helix-slack-notification/commit/7acda0160d694c926d886d5b496c3d8f32d06393))
+
 ## [1.8.39](https://github.com/adobe/helix-slack-notification/compare/v1.8.38...v1.8.39) (2026-02-10)
 
 
