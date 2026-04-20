@@ -47,7 +47,7 @@ jobs:
           aws-region: us-east-1
           role-to-assume: ${{ env.AWS_DEPLOY_ROLE }}
       - name: Fetch AWS Secrets
-        uses: aws-actions/aws-secretsmanager-get-secrets@v2
+        uses: aws-actions/aws-secretsmanager-get-secrets@v3
         with:
           parse-json-secrets: true
           secret-ids: |
@@ -77,7 +77,7 @@ jobs:
           aws-region: us-east-1
           role-to-assume: ${{ env.AWS_DEPLOY_ROLE }}
       - name: Fetch AWS Secrets
-        uses: aws-actions/aws-secretsmanager-get-secrets@v2
+        uses: aws-actions/aws-secretsmanager-get-secrets@v3
         with:
           parse-json-secrets: true
           secret-ids: |
